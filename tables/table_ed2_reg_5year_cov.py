@@ -6,7 +6,7 @@ from glob import glob
 
 reg_dir = '/home/atom/ongoing/work_worldwide/vol/reg'
 list_fn_reg_multann = [os.path.join(reg_dir,'dh_'+str(i).zfill(2)+'_rgi60_int_base_reg_subperiods.csv') for i in np.arange(1,20)]
-out_csv = '/home/atom/ongoing/work_worldwide/tables/TableSupp_obs_coverage.csv'
+out_csv = '/home/atom/ongoing/work_worldwide/tables/revised/ED_Table_2.csv'
 df = pd.DataFrame()
 for fn_reg_multann in list_fn_reg_multann:
     df= df.append(pd.read_csv(fn_reg_multann))
@@ -26,7 +26,7 @@ def sum_regions(df_p):
     dvoldt_global = np.nansum(df_p.dvoldt.values)
     err_dvoldt_global = np.sqrt(np.nansum(df_p.err_dvoldt.values ** 2))
 
-    err_tarea_global = np.sqrt(np.nansum((3 / 100. * df_p.tarea.values) ** 2))
+    err_tarea_global = np.sqrt(np.nansum((1 / 100. * df_p.tarea.values) ** 2))
     dhdt_global = np.nansum(df_p.dvoldt.values) / tarea_global
     err_dhdt_global = np.sqrt(
         (err_dvoldt_global / tarea_global) ** 2 + (err_tarea_global * dvoldt_global / (tarea_global ** 2)) ** 2)

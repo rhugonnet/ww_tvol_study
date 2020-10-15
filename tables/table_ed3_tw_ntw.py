@@ -6,7 +6,7 @@ from glob import glob
 from collections import OrderedDict
 
 reg_dir = '/home/atom/ongoing/work_worldwide/vol/reg'
-fn_o1 = '/home/atom/ongoing/work_worldwide/vol/tile/subreg_multann_O1.csv'
+fn_o1 = '/home/atom/ongoing/work_worldwide/vol/tile/subreg_multann_O1_err.csv'
 out_csv = '/home/atom/ongoing/work_worldwide/tables/revised/ED_Table_3.csv'
 
 df_in = pd.read_csv(fn_o1)
@@ -28,7 +28,7 @@ def sum_regions(df_p):
     dvoldt_global = np.nansum(df_p.dvoldt.values)
     err_dvoldt_global = np.sqrt(np.nansum(df_p.err_dvoldt.values ** 2))
 
-    err_tarea_global = np.sqrt(np.nansum((3 / 100. * df_p.tarea.values) ** 2))
+    err_tarea_global = np.sqrt(np.nansum((1 / 100. * df_p.tarea.values) ** 2))
     dhdt_global = np.nansum(df_p.dvoldt.values) / tarea_global
     err_dhdt_global = np.sqrt(
         (err_dvoldt_global / tarea_global) ** 2 + (err_tarea_global * dvoldt_global / (tarea_global ** 2)) ** 2)
@@ -111,6 +111,7 @@ for k in range(len(list_df)):
     column_str_dh_err = []
     column_str_dm = []
     column_str_dm_err = []
+    column_str_rel_inc = []
     for j in range(len(list_dh[0])):
         list_str_dh = []
         list_str_err_dh = []
@@ -125,15 +126,18 @@ for k in range(len(list_df)):
         final_str_dh_err = '/'.join(list_str_err_dh)
         final_str_dm = '/'.join(list_str_dm)
         final_str_dm_err = '/'.join(list_str_err_dm)
-        column_str_dh.append(final_str_dh)
-        column_str_dh_err.append(final_str_dh_err)
-        column_str_dm.append(final_str_dm)
-        column_str_dm_err.append(final_str_dm_err)
+        column_str_dh.append(final_str_dh + ' ± '+final_str_dh_err)
+        # column_str_dh_err.append(final_str_dh_err)
+        column_str_dm.append(final_str_dm+ ' ± '+final_str_dm_err)
+        # column_str_dm_err.append(final_str_dm_err)
+        rel_inc = (float(list_dh[3][j])-float(list_dh[0][j]))/float(list_dh[0][j])
+        column_str_rel_inc.append('{:.2f}'.format(rel_inc))
 
     df_out['dh_sub'] = column_str_dh
-    df_out['dh_err_sub'] = column_str_dh_err
+    # df_out['dh_err_sub'] = column_str_dh_err
     df_out['dm_sub'] = column_str_dm
-    df_out['dm_err_sub'] = column_str_dm_err
+    # df_out['dm_err_sub'] = column_str_dm_err
+    df_out['rel_inc'] = column_str_rel_inc
 
     areas = ['{:.0f}'.format(df_full_p.area.values[i] / 1000000) for i in range(len(df_full_p))]
     df_out.insert(loc=0, column='region', value=region_names)
@@ -153,10 +157,12 @@ df_final = pd.DataFrame()
 df_final['region'] = list_df_out[0]['region']
 df_final['area_tw'] = list_df_out[0]['area']
 df_final['dhdt_tw'] = list_df_out[0]['dh_sub']
-df_final['err_dhdt_tw'] = list_df_out[0]['dh_err_sub']
+# df_final['err_dhdt_tw'] = list_df_out[0]['dh_err_sub']
+df_final['rel_inc_tw'] = list_df_out[0]['rel_inc']
 df_final['area_ntw'] = list_df_out[1]['area'].values
 df_final['dhdt_ntw'] = list_df_out[1]['dh_sub'].values
-df_final['err_dhdt_ntw'] = list_df_out[1]['dh_err_sub'].values
+# df_final['err_dhdt_ntw'] = list_df_out[1]['dh_err_sub'].values
+df_final['rel_inc_ntw'] = list_df_out[1]['rel_inc'].values
 
 df_final.to_csv(out_csv)
 

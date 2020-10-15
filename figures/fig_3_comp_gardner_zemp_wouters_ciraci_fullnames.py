@@ -247,9 +247,9 @@ ax.vlines(np.arange(-1,17*5,5),-3,3,colors='grey',alpha=0.7,linewidth=0.75,lines
 
 ax.hlines(0,-5,17*5+5,linestyles='dashed',colors=plt.cm.Greys(0.9))
 
-ticks = ['ALA (01)','WNA (02)','ACN (03)','ACS (04)','GRL (05)', 'ISL (06)','SJM (07)', 'SCA (08)','RUA (09)','ASN (10)','CEU (11)','CAU (12)','HMA (13-15)','TRP (16)','SAN (17)','NZL (18)','ANT (19)']
+ticks = ['Alaska (01)','Western Canada\nand USA (02)','Arctic Canada\nNorth (03)','Arctic Canada\nSouth (04)','Greenland\nPeriphery (05)', 'Iceland (06)','Svalbard and\nJan Mayen (07)', 'Scandinavia (08)','Russian\nArctic (09)','North Asia (10)','Central\nEurope (11)','Caucasus and\nMiddle East (12)','High Mountain\nAsia (13-15)','Low\nLatitudes (16)','Southern\nAndes (17)','New\nZealand (18)','Antarctic and\nSubantarctic (19)']
 ax.set_xticks(np.arange(1.5,17*5,5))
-ax.set_xticklabels(ticks,rotation='vertical')
+ax.set_xticklabels(ticks,rotation=90)
 ax.set_ylabel('Specific mass change rate (m w.e yr$^{-1}$)')
 ax.set_xlim([-1,17*5-1])
 ax.set_ylim([-1.5,0.4])
@@ -279,7 +279,7 @@ def make_legend_polygon(legend, orig_handle,
 
 
 hm = {p0: HandlerErrorbar(xerr_size=0.9), p4[0]: HandlerPatch(patch_func=make_legend_polygon), p2[0]: HandlerPatch(patch_func=make_legend_polygon), p6[0]: HandlerPatch(patch_func=make_legend_polygon),p8[0]: HandlerPatch(patch_func=make_legend_polygon)}
-ax.legend([(p3[0],p4[0]),(p5[0],p6[0]),(p7[0], p8[0]),(p1[0], p2[0]),p0], ['Gardner et al.: mix\n(2003-2009)','Wouters et al.: gravimetry\n(2002-2016)','Ciracì et al.: gravimetry\n(2002-2020)','Zemp et al.: DEMs\n(2006-2016)','This study: DEMs\n(same period)'],ncol=3,handlelength=1,framealpha=1,loc='upper center',labelspacing=0.5,handler_map=hm,borderpad=0.4)
+ax.legend([(p3[0],p4[0]),(p5[0],p6[0]),(p7[0], p8[0]),(p1[0], p2[0]),p0], ['Gardner et al. (2003-2009):\ngravi., in-situ, elev. change','Wouters et al. (2002-2016):\ngravi.','Ciracì et al. (2002-2020):\ngravi.','Zemp et al. (2006-2016):\nin-situ, elev. change','This study (corresp. period):\nelev. change'],ncol=3,handlelength=1,framealpha=1,loc='upper right',labelspacing=0.5,handler_map=hm,borderpad=0.4)
 # ax.yaxis.grid(True,linestyle='--')
 
 
@@ -507,7 +507,7 @@ ax1.set_ylim([-0.75,0.01])
 ax1.set_xticks([np.datetime64('20'+str(5*i).zfill(2)+'-01-01') for i in range(5)])
 ax1.set_xticklabels(['2000','2005','2010','2015',''])
 # ax.set_ylabel('Specific mass change (m w.e yr$^{-1}$)')
-ax1.set_xlabel('Year\n(Global excl. GRL and ANT)')
+ax1.set_xlabel('Year\n(Global excl. Greenland Periphery\n and Antarctic and Subantarctic)')
 ax1.set_ylabel('Specific mass change rate (m w.e yr$^{-1}$)')
 ax1.text(0.075, 0.95, 'b', transform=ax1.transAxes, ha='left', va='top',fontweight='bold',fontsize=14)
 
