@@ -18,7 +18,7 @@ The dataset consists of:
 
 *Note: tile mass changes (e.g., 1x1°) currently rely on per-glacier integrated volumes later aggregated according to 
 glacier outline centroids. Therefore, those changes are not necessarily representative of mass change within the exact 
-spatial boundaries of a tile. Deriving this change is more complex and is not available yet (contact me for more details).* 
+spatial boundaries of a tile. Deriving those specific changes is more complex and is not available yet (contact me for more details).* 
 
 ### Setup environment
 
@@ -112,15 +112,3 @@ As further guide, you will find comments directly present in the structure of th
 [pymmaster](https://mmaster-workflows.readthedocs.io/en/latest/index.html)).
 
 **Enjoy !** :snowflake:
-
-
-
-=======
-This repository contains all scripts used to process DEMs into globally resolved time series of glacier mass change (see #provide link when available).
-
-Routines rely on the following packages (todo: provide environment file):
-- pybob: for manipulating georeferenced data, co-registering DEMs (Nuth and Kääb (2012)).
-- MMASTER-workflows: for generating and correcting ASTER DEMs
-- pyddem: for creating DEM stacks, interpolating time series and deriving volume changes with uncertainty propagation
-- rh_pygeotools: old routines for manipulating georeferenced data and process various DEM products (ArcticDEM, REMA, TanDEM-X, ...)
->>>>>>> 4e5077f25c0357025b84d14df091babdcce79506
