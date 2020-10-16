@@ -108,7 +108,7 @@ For example, the equivalent of Extended Data Fig. 7 colored by the number of val
 TBC
 ```
 
-As further guide, you will find comments directly present in the structure of the code, and detailed documentation of our packages ([pyddem](https://pyddem.readthedocs.io/en/latest/),
+As further guide, you will find comments directly present in the structure of the code, or in the detailed documentation of our packages ([pyddem](https://pyddem.readthedocs.io/en/latest/),
 [pymmaster](https://mmaster-workflows.readthedocs.io/en/latest/index.html)).
 
 **Enjoy !** :snowflake:
