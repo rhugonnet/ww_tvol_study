@@ -95,7 +95,7 @@ propagation using the spatial correlation constrained with ICESat.
 
 ## Reproduce the Figures, Tables and main text values
 
-To generate Figures, Tables and values cited in the main text, we use the scripts located in *figures/* and *tables/*.
+To generate the Figures, Tables and values cited in the main text, we use the scripts located in *figures/* and *tables/*.
 
 Additional data might be necessary to run some of these scripts, such as a world hillshade (we used 
 [SRTM30_PLUS v8.0](https://researchdata.edu.au/global-hillshading-srtm30plus-source-ucsd/690579)), buffered RGI 6.0 
