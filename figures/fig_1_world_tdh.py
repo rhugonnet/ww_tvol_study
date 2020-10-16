@@ -47,7 +47,7 @@ def poly_from_extent(ext):
     return poly
 polygon = poly_from_extent(bounds)
 
-sub_ax = fig.add_axes([0.075,0,0.85,0.85],
+sub_ax = fig.add_axes([0.0875,0,0.825,0.825],
                       projection=ccrs.Robinson(), label='world')
 sub_ax.set_extent([-179.99,179.99,-89.99,89.99], ccrs.Geodetic())
 
@@ -381,14 +381,14 @@ def add_reg_label(rect_center,text,label):
 
     sub_ax_lab.set_boundary(verts, transform=sub_ax_lab.transAxes)
 
-    if text == 'GLOBAL':
+    if text == 'Global':
         fs = 14
     else:
         fs = 12
 
     sub_ax_lab.text(rect_center[0], rect_center[1]-60000, text,
                   horizontalalignment='center', verticalalignment='top',
-                  transform=ccrs.Robinson(), color='black', fontsize=fs, bbox= dict(facecolor='white', alpha=1),fontweight='bold')
+                  transform=ccrs.Robinson(), color='black', fontsize=fs, bbox= dict(facecolor='white', alpha=0.9))
 
 
 
@@ -431,7 +431,7 @@ def add_color_ribbon_circ(position,tdh,dmdt,valid_obs_py,label,perc_dm_tw,perc_a
     # derive position of center of region polygon for downscaled Earth
     xy_orig = coordXform(ccrs.PlateCarree(), ccrs.Robinson(), np.array([orig_pos[0]]), np.array([orig_pos[1]]))[0][0:2]
 
-    pos_x, pos_y = line_main_to_inset([0.075, 0, 0.85, 0.85], [0, 0, 1, 1], np.array([xy_orig[0], xy_orig[1]]))
+    pos_x, pos_y = line_main_to_inset([0.0875, 0, 0.825, 0.825], [0, 0, 1, 1], np.array([xy_orig[0], xy_orig[1]]))
 
     sub_ax_cerc.add_patch(
         mpatches.Arrow(xy[0], xy[1] -rad -width_area, pos_x - xy[0], pos_y - (xy[1] -rad -width_area), color='black', linewidth=1,
@@ -465,7 +465,7 @@ def add_color_ribbon_circ(position,tdh,dmdt,valid_obs_py,label,perc_dm_tw,perc_a
 
     gt_loss = np.abs(dmdt)/1000
     if gt_loss > 3.:
-        if text == 'GLOBAL':
+        if text == 'Global':
             fs=16
         else:
             fs=14
@@ -474,7 +474,7 @@ def add_color_ribbon_circ(position,tdh,dmdt,valid_obs_py,label,perc_dm_tw,perc_a
                          horizontalalignment='center', verticalalignment='center',
                          transform=ccrs.Robinson(), color=plt.cm.Blues(0.99), fontsize=fs,
                          fontweight='bold',zorder=30)
-        if text == 'GLOBAL':
+        if text == 'Global':
             sub_ax_cerc.text(xy[0]+10000,xy[1]-500000,'Gt yr$^{-1}$',horizontalalignment='center', verticalalignment='center',
                          transform=ccrs.Robinson(), color=plt.cm.Blues(0.99), fontsize=16,
                          fontweight='bold',zorder=30)
@@ -487,7 +487,7 @@ def add_color_ribbon_circ(position,tdh,dmdt,valid_obs_py,label,perc_dm_tw,perc_a
     cb2 = [plt.cm.Blues(1-val) for val in valid_obs_py]
 
     #add color ribbons + region label
-    if text != 'GLOBAL':
+    if text != 'Global':
         color_ribbon(cb,(xy[0],xy[1]-rad-width_area-height_ribbon/2),width_ribbon,height_ribbon,label=label,ticks='bottom')
         color_ribbon(cb2, (xy[0], xy[1] - rad - width_area), width_ribbon, height_ribbon / 2, label=label + '_valid',
                      ticks=None)
@@ -509,9 +509,9 @@ df = df[~ind_as]
 tlim=[np.datetime64(str(2000+i)+'-01-01') for i in range(21)]
 list_reg = sorted(list(set(list(df.subreg))))
 
-#              Alaska,  Antarc,  CA N,  CA S,   Asia C,   Asia N,  Asia W,  Asia E,  Caucas,  Europe,  Green E,  Green N, Green W, Ice,  Low lat, New Zeal,      Russ E,    Russ W,    Scand,     SA N,    SA S,  Svalb,   USA,  West CA
-list_offsets = [(-5,-1),(7,17),(-20,-10),(8,-36),(40,-25),(30,-28),(8,-32),(-7,-40),(-7,-28),(-3,-28),(-10,-45),(5,-5.4),(-25,4.95),(0,-35),(-20,-15),(-20,-15),(65.5,-20.8),(65,-4.5),(40,5.05),(35,0),(-15,0),(5,-2.15),(18,-30),(-14,-39)]
-list_text = ['ALA (01)','ANT (19)','ACN (03)','ACS (04)','ASC (13)', 'ASN (10)', 'ASE (15)','ASW (14)','CAU (12)','CEU (11)','GRL E (05 E)','GRL N (05 N)','GRL W (05 W)','ISL (06)','TRP (16)','NZL (18)','RUA E (09 E)','RUA W (09 W)', 'SCA (08)','SAN N (17 N)','SAN S (17 S)','SJM (07)','WNA S (02 S)','WNA N (02 N)']
+#              Alaska,  Antarc,  CA N,    CA S,   Asia C,   Asia N,  Asia W,  Asia E,  Caucas,  Europe,  Green E,  Green N, Green W, Ice,  Low lat, New Zeal,      Russ E,    Russ W,    Scand,     SA N,    SA S,  Svalb,   USA,  West CA
+list_offsets = [(-6,-1),(7,22),(-22,-10.0),(8,-36.5),(40,-27),(30,-28),(8,-32),(-7,-40),(-7,-28),(-3,-28),(-8,-52),(5,-5.1),(-25,5.55),(0,-35),(-20,-15),(-20,-15),(65.5,-24.8),(65,-5.4),(41,4.85),(40,0),(-15,3),(5,-2.25),(19,-30),(-17.5,-39)]
+list_text = ['Alaska (01)','Antarctic and\nSubantarctic (19)','Arctic Canada\nNorth (03)','Arctic Canada\nSouth (04)','Central Asia (13)', 'North Asia (10)', 'South Asia\nEast (15)','South Asia\nWest (14)','Caucasus and\nMiddle East (12)','Central\nEurope (11)','Greenland\nPeri., E (05 E)','Greenland\nPeri., N (05 N)','Greenland\nPeri., W (05 W)','Iceland (06)','Low Latitudes (16)','New Zealand (18)','Russian Arctic,\nE (09 E)','Russian Arctic,\nW (09 W)', 'Scandinavia (08)','Southern Andes,\n N (17 N)','Southern Andes,\nS (17 S)','Svalbard and\nJan Mayen (07)','USA (02 S)','Western\nCanada (02 N)']
 for reg in list_reg:
     df_reg = df[df.subreg == reg]
 
@@ -573,8 +573,8 @@ else:
     perc_area_tw = 0.
     perc_dm_tw = 0.
 
-add_color_ribbon_circ(np.array([-126,-30]),yearly_dh_world,df_world[np.logical_and(df_world.category=='all',df_world.period=='2000-01-01_2020-01-01')].dmdt.values[-1]*1000,valid_obs_py_world,label='world',perc_dm_tw=perc_dm_tw,perc_area_tw=perc_area_tw,text='GLOBAL',width_ribbon=200000,height_ribbon=2000000)
-plt.savefig('/home/atom/ongoing/work_worldwide/figures/Figure_1_main.png',dpi=400,transparent=True)
+add_color_ribbon_circ(np.array([-126,-30]),yearly_dh_world,df_world[np.logical_and(df_world.category=='all',df_world.period=='2000-01-01_2020-01-01')].dmdt.values[-1]*1000,valid_obs_py_world,label='world',perc_dm_tw=perc_dm_tw,perc_area_tw=perc_area_tw,text='Global',width_ribbon=200000,height_ribbon=2000000)
+plt.savefig('/home/atom/ongoing/work_worldwide/figures/Figure_1_v2_main.png',dpi=400,transparent=True)
 
 
 
@@ -583,7 +583,7 @@ plt.savefig('/home/atom/ongoing/work_worldwide/figures/Figure_1_main.png',dpi=40
 fig_width_inch=19.
 fig = plt.figure(figsize=(fig_width_inch,fig_width_inch/1.9716))
 
-out_png = '/home/atom/ongoing/work_worldwide/figures/Figure_1_legend.png'
+out_png = '/home/atom/ongoing/work_worldwide/figures/Figure_1_v2_legend.png'
 axleg2 = fig.add_axes([0,0,1,1],projection=ccrs.Robinson(),label='legend2')
 axleg2.outline_patch.set_linewidth(0)
 

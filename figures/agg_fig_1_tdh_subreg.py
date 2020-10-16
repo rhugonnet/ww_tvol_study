@@ -100,7 +100,7 @@ for feature in layer_in:
 
                 list_df_mult = []
                 for mult_ann in [1, 2, 4, 5, 10, 20]:
-                    df_mult = tt.aggregate_all_to_multiannual(df_subreg_reg, mult_ann=mult_ann,fn_tarea=fn_tarea,frac_area=frac_area)
+                    df_mult = tt.aggregate_all_to_period(df_subreg_reg, mult_ann=mult_ann,fn_tarea=fn_tarea,frac_area=frac_area)
                     list_df_mult.append(df_mult)
 
                 df_mult_all = pd.concat(list_df_mult)
