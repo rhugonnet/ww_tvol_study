@@ -9,16 +9,23 @@ Below a short guide to: manipulate the dataset, reproduce the processing steps, 
 ### Retrieve the data
 
 The dataset consists of:
-1. **Time series of volume and mass change** (.csv) for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 
-2x2°) and per-glacier at an annual time step, available at [TBC]()
-2. **Elevation change rasters** (.tif) at 100 m posting for successive 5-year, 10-year and 20-year periods of 2000-2019,
- available at [TBC]()
-3. **Elevation time series** (.nc) at 100 m posting and monthly time step, available at [TBD]()
-4. **Bias-corrected ASTER DEMs** at 30 m posting, available at [TBD]()
+1. **Cumulative time series of volume and mass change** (.csv, *~500MB*) at an annual time step and **rates of volume 
+and mass changes** (.csv, *~3GB*) for successive 1-, 2-, 4-, 5-, 10- and 20-year periods of 2000-2019, both 
+for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and per-glacier, available at [TBC]().
+2. **Elevation change rasters** (.tif, *~15GB*) at 100 m posting for successive 5-, 10- and 20-year periods of 2000-2019,
+ available at [TBC]().
+3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step, available at [TBC]().
+4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting, available at [TBC]().
 
-*Note: tile mass changes (e.g., 1x1°) currently rely on per-glacier integrated volumes later aggregated according to 
-glacier outline centroids. Therefore, those changes are not necessarily representative of mass change within the exact 
-spatial boundaries of a tile. Deriving those specific changes is more complex and is not available yet (contact me for more details).* 
+*Notes:*
+* *Rates uncertainties over a specific period (e.g., 2004-2011) **need to be derived from the cumulative volume change
+time series**, due to the varying spatial correlation at each point in time (volume time series) and temporal correlation at the regional 
+scale assumed for certain uncertainties (density conversion).*
+* *Mass change **cumulative series and rates for periods shorter than 5 years** are provided, but **do not respect assumptions of density conversion** 
+of [Huss (2013)](https://tc.copernicus.org/articles/7/877/2013/), possibly resulting in too small uncertainties.*
+* ***Tile mass changes** (e.g., 1x1° grid) currently rely on per-glacier integrated volumes, aggregated according to 
+glacier outline centroids. Therefore, those changes **are not necessarily representative of mass change within the exact 
+spatial boundaries of the tile**. Deriving such changes is more complex and is not available yet (contact me for more details).* 
 
 ### Setup environment
 
