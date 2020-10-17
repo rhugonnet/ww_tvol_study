@@ -163,8 +163,7 @@ def fit_tile(tile,tmp_ref_dir,out_dir):
         t0 = np.datetime64('2000-01-01')
         t1 = np.datetime64('2020-01-01')
 
-        ft.get_full_dh(ds, t0, t1,
-                       os.path.join(os.path.dirname(outfile), os.path.splitext(os.path.basename(outfile))[0]))
+        ft.get_full_dh(ds, os.path.join(os.path.dirname(outfile), os.path.splitext(os.path.basename(outfile))[0]),t0=t0, t1=t1)
 
     else:
         print('Tile already processed.')
