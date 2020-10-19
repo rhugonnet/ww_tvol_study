@@ -231,7 +231,7 @@ dependencies:
     - pip==19.1.1
     - pkgconfig==1.4.0
     - pybob==0.24
-    - pyddem==0.1
+    - pyddem==0.1.1
     - pymmaster==0.1
     - pykml==0.1.3
     - pykrige==1.4.1
