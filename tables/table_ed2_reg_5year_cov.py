@@ -1,13 +1,13 @@
-from __future__ import print_function
+
 import os, sys
 import numpy as np
 import pandas as pd
 import pyddem.tdem_tools as tt
 from glob import glob
 
-reg_dir = '/home/atom/ongoing/work_worldwide/vol/reg'
+reg_dir = '/home/atom/ongoing/work_worldwide/vol/final'
 list_fn_reg_multann = [os.path.join(reg_dir,'dh_'+str(i).zfill(2)+'_rgi60_int_base_reg_subperiods.csv') for i in np.arange(1,20)]
-out_csv = '/home/atom/ongoing/work_worldwide/tables/revised/ED_Table_2.csv'
+out_csv = '/home/atom/ongoing/work_worldwide/tables/final/ED_Table_2.csv'
 df = pd.DataFrame()
 for fn_reg_multann in list_fn_reg_multann:
     df= df.append(pd.read_csv(fn_reg_multann))

@@ -2,7 +2,7 @@
 @author: hugonnet
 derive volume changes from all high-res differences of DEMs
 """
-from __future__ import print_function
+
 import os, sys
 from rastlib import list_valid_feat_intersect
 from glob import glob

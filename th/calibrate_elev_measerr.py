@@ -3,7 +3,7 @@
 compile elevation variances derived for each tile
 #TODO: this was done in parallel of previous fitting results, need to dissociate the two processes in "fit_tools" to allow to do this sequentially
 """
-from __future__ import print_function
+
 import pandas as pd
 import numpy as np
 import os

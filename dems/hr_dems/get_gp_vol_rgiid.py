@@ -2,7 +2,7 @@
 @author: hugonnet
 extract volume changes from GP time series for the same glaciers and periods as high-res differences of DEMs
 """
-from __future__ import print_function
+
 import os, sys
 import pandas as pd
 import numpy as np

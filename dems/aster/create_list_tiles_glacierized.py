@@ -2,7 +2,7 @@
 @author: hugonnet
 derive list 1x1 tiles with glaciers and their glacierized area from RGI shapefile
 """
-from __future__ import print_function
+
 import numpy as np
 import csv, os
 from tiledivlib import stack_tile_polygon, area_intersect_geom_listpoly

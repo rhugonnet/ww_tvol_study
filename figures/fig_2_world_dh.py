@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.path as mpath
@@ -12,8 +12,7 @@ import gdal, osr
 import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from scipy.spatial import ConvexHull
-from pymmaster.other_tools import SRTMGL1_naming_to_latlon, latlon_to_SRTMGL1_naming
-import pymmaster.other_tools as ot
+from pyddem.vector_tools import SRTMGL1_naming_to_latlon, latlon_to_SRTMGL1_naming, geoimg_mask_on_feat_shp_ds, create_mem_shp, poly_from_coords
 from pybob.image_tools import create_mask_from_shapefile
 from pybob.GeoImg import GeoImg
 from cartopy.io.shapereader import Reader
@@ -280,14 +279,14 @@ def add_inset(fig,extent,position,bounds=None,label=None,polygon=None,shades=Tru
     if hillshade:
         def out_of_poly_mask(geoimg, poly_coords):
 
-            poly = ot.poly_from_coords(inter_poly_coords(poly_coords))
+            poly = poly_from_coords(inter_poly_coords(poly_coords))
             srs = osr.SpatialReference()
             srs.ImportFromEPSG(4326)
 
             # put in a memory vector
-            ds_shp = ot.create_mem_shp(poly, srs)
+            ds_shp = create_mem_shp(poly, srs)
 
-            return ot.geoimg_mask_on_feat_shp_ds(ds_shp, geoimg)
+            return geoimg_mask_on_feat_shp_ds(ds_shp, geoimg)
 
         def inter_poly_coords(polygon_coords):
             list_lat_interp = []
@@ -424,7 +423,9 @@ def add_inset(fig,extent,position,bounds=None,label=None,polygon=None,shades=Tru
         size_y = 150000
         size_x = 150000
 
-        robin = coordXform(ccrs.PlateCarree(),ccrs.Robinson(),np.array([lon_min,lon_min,lon_min,lon_mid,lon_mid,lon_max,lon_max,lon_max]),np.array([lat_min,lat_mid,lat_max,lat_min,lat_max,lat_min,lat_mid,lat_max]))
+        lat_midup = lat_min+0.87*(lat_max-lat_min)
+
+        robin = coordXform(ccrs.PlateCarree(),ccrs.Robinson(),np.array([lon_min,lon_min,lon_min,lon_mid,lon_mid,lon_max,lon_max,lon_max,lon_min]),np.array([lat_min,lat_mid,lat_max,lat_min,lat_max,lat_min,lat_mid,lat_max,lat_midup]))
 
         if sub_pos=='lb':
             rob_x = robin[0][0]
@@ -436,6 +437,11 @@ def add_inset(fig,extent,position,bounds=None,label=None,polygon=None,shades=Tru
             rob_y = robin[1][1]
             ha='left'
             va='center'
+        elif sub_pos == 'lm2':
+            rob_x = robin[8][0]
+            rob_y = robin[8][1]
+            ha = 'left'
+            va = 'center'
         elif sub_pos=='lt':
             rob_x = robin[2][0]
             rob_y = robin[2][1]
@@ -548,22 +554,22 @@ cmap22._lut[1:, -1] = 0.10
 add_inset(fig,[-179.99,179.99,-89.99,89.99],[0.375, 0.21, 0.25, 0.25],bounds=[-179.99,179.99,-89.99,89.99],shades=False, hillshade = False, main=True, list_shp=shp_buff)
 
 poly_aw = np.array([(-158,-79),(-135,-62),(-110,-62),(-50,-62),(-50,-79.25),(-158,-79.25)])
-add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.4,-0.065,2,2],bounds=[-158, -50, -62.5, -79],label='Antarctica_West',polygon=poly_aw,shades=True)
+add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.4,-0.065,2,2],bounds=[-158, -50, -62.5, -79],label='Antarctica_West',polygon=poly_aw,shades=True,markup_sub='a',sub_pos='mb')
 
 poly_ae = np.array([(135,-81.5),(152,-63.7),(165,-65),(175,-70),(175,-81.25),(135,-81.75)])
-add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.71,-0.045,2,2],bounds=[130, 175, -64.5, -81],label='Antarctica_East',polygon=poly_ae,shades=True)
+add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.71,-0.045,2,2],bounds=[130, 175, -64.5, -81],label='Antarctica_East',polygon=poly_ae,shades=True,markup_sub='e',sub_pos='mb')
 
 poly_ac = np.array([(-25,-62),(106,-62),(80,-79.25),(-25,-79.25),(-25,-62)])
-add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.52,-0.065,2,2],bounds=[-25, 106, -62.5, -79],label='Antarctica_Center',polygon=poly_ac,shades=True,markup='Antarctic and Subantarctic (19)',markpos='right',markadj=0)
+add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.52,-0.065,2,2],bounds=[-25, 106, -62.5, -79],label='Antarctica_Center',polygon=poly_ac,shades=True,markup='Antarctic and Subantarctic (19)',markpos='right',markadj=0,markup_sub='c',sub_pos='mb')
 
-add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.68,-0.18,2,2],bounds=[64, 78, -48, -55],label='Antarctica_Australes',shades=True,markup_sub='b',sub_pos='lt')
+add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.68,-0.18,2,2],bounds=[64, 78, -48, -55],label='Antarctica_Australes',shades=True,markup_sub='d',sub_pos='lt')
 
-add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.42,-0.155,2,2],bounds=[-40, -23, -53, -60],label='Antarctica_South_Georgia',shades=True,markup_sub='a',sub_pos='rt')
+add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.42,-0.155,2,2],bounds=[-40, -23, -53, -60],label='Antarctica_South_Georgia',shades=True,markup_sub='b',sub_pos='rt')
 
-add_inset(fig, [-179.99,179.99,-89.99,89.99], [-0.52, -0.225, 2, 2],bounds=[-82,-65,13,-57],label='Andes',markup='Low Latitudes (16) &\nSouthern Andes (17)',markadj=0)
-add_inset(fig, [-179.99,179.99,-89.99,89.99], [-0.352, -0.39, 2, 2],bounds=[-100,-95,22,16],label='Mexico',markup_sub='a',sub_pos='rb')
-add_inset(fig, [-179.99,179.99,-89.99,89.99], [-1.078, -0.24, 2, 2],bounds=[28,42,2,-5],label='Africa',markup_sub='b',sub_pos='rb')
-add_inset(fig, [-179.99,179.99,-89.99,89.99], [-1.640, -0.3, 2, 2],bounds=[133,140,-2,-7],label='Indonesia',markup_sub='c',sub_pos='rb')
+add_inset(fig, [-179.99,179.99,-89.99,89.99], [-0.52, -0.225, 2, 2],bounds=[-82,-65,13,-57],label='Andes',markup='Low Latitudes (16) &\nSouthern Andes (17)',markadj=0,markup_sub='a',sub_pos='lm2')
+add_inset(fig, [-179.99,179.99,-89.99,89.99], [-0.352, -0.39, 2, 2],bounds=[-100,-95,22,16],label='Mexico',markup_sub='b',sub_pos='rb')
+add_inset(fig, [-179.99,179.99,-89.99,89.99], [-1.078, -0.24, 2, 2],bounds=[28,42,2,-5],label='Africa',markup_sub='c',sub_pos='rb')
+add_inset(fig, [-179.99,179.99,-89.99,89.99], [-1.640, -0.3, 2, 2],bounds=[133,140,-2,-7],label='Indonesia',markup_sub='d',sub_pos='rb')
 
 poly_arctic = np.array([(-105,84.5),(115,84.5),(110,68),(30,68),(18,57),(-70,57),(-100,75),(-105,84.5)])
 add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.48,-1.003,2,2],bounds=[-100, 106, 57, 84],label='Arctic West',polygon=poly_arctic,markup='Arctic (03-09)',markadj=0)

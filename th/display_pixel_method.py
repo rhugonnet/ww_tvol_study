@@ -3,7 +3,7 @@
 display filtering + fitting operations performed for 1 pixel of a stack (for reasons of space, cannot be done with the entire stack)
 #TODO: add filtering routines with the surrounding pixels; right now is only demonstrated the rough first filtering + GP
 """
-from __future__ import print_function
+
 import numpy as np
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C, ExpSineSquared as ESS, PairwiseKernel, RationalQuadratic as RQ, WhiteKernel as WK

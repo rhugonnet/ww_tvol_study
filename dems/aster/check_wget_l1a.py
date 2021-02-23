@@ -7,7 +7,7 @@ a lot easier with wget than curl, but checking errors is a bit tedious.
 TODO: one solution would be to call from Python multiprocessing and check errors: mp wrapper commented at end of file
 """
 
-from __future__ import print_function
+
 import os
 import csv
 

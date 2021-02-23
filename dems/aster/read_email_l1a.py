@@ -16,7 +16,7 @@ need to put everything under a label and authorize access to "less secure apps" 
 """
 
 # TODO: script MBOX only works in Python 2.7 apparently
-from __future__ import print_function
+
 import mailbox
 import imaplib
 import email

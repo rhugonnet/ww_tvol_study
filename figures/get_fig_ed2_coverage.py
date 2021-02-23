@@ -2,7 +2,7 @@
 @author: hugonnet
 retrieve ASTER, ArcticDEM and REMA strip coverage for Fig. S2
 """
-from __future__ import print_function
+
 import os
 import pyddem.vector_tools as ot
 from glob import glob

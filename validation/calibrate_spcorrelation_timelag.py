@@ -2,7 +2,7 @@
 @author: hugonnet
 sample spatial correlations from differences to ICESat with varying time lags
 """
-from __future__ import print_function
+
 import os
 import numpy as np
 import pandas as pd

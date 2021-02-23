@@ -2,7 +2,7 @@
 @author: hugonnet
 to retrieve ref DEM tiles (TDX): create extended tiles based on L1A width and latitude distorsion and calculates 1x1 tiles intersecting this new shapefile
 """
-from __future__ import print_function
+
 import csv, os
 import pandas as pd
 import numpy as np

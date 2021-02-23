@@ -2,7 +2,7 @@
 @author: hugonnet
 extract GLIMS outline to replace RGI in region 10
 """
-from __future__ import print_function
+
 import ogr, osr, gdal, gdalconst
 import numpy as np
 import os

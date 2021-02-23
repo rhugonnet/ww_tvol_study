@@ -2,7 +2,7 @@
 @author: hugonnet
 count original segments from output summary files of pairwise co-registration for Table S1
 """
-from __future__ import print_function
+
 import pandas as pd
 import os
 from glob import glob

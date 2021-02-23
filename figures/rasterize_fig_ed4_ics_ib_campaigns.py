@@ -3,7 +3,6 @@
 rasterize the mean z-score of differences to ICESat/IceBridge for Saint-Elias Moutains, ED Fig. 4
 """
 
-from __future__ import print_function
 import os, sys
 import numpy as np
 import pandas as pd

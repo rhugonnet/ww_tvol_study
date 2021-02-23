@@ -2,7 +2,7 @@
 @author: hugonnet
 transform all ILAKS1B LAS into DEM using the Ames Stereo Pipeline
 """
-from __future__ import print_function
+
 import os
 import sys
 from glob import glob

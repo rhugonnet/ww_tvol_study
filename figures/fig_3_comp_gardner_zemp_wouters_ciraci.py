@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import os, sys
 import pandas as pd
 import numpy as np
@@ -34,7 +34,7 @@ for fn_reg in list_fn_reg:
 
 df = pd.concat(list_df)
 
-fig = plt.figure(figsize=(17,7.5))
+fig = plt.figure(figsize=(17.5,7.75))
 grid = plt.GridSpec(20, 17, wspace=0.25, hspace=0)
 
 nb = 4 + 1
@@ -143,7 +143,7 @@ def make_legend_polygon(legend, orig_handle,
 
 
 hm = {p0: HandlerErrorbar(xerr_size=0.9), p4[0]: HandlerPatch(patch_func=make_legend_polygon), p2[0]: HandlerPatch(patch_func=make_legend_polygon), p6[0]: HandlerPatch(patch_func=make_legend_polygon),p8[0]: HandlerPatch(patch_func=make_legend_polygon)}
-ax.legend([(p3[0],p4[0]),(p5[0],p6[0]),(p7[0], p8[0]),(p1[0], p2[0]),p0], ['Gardner et al. (2003-2009):\ngravi., in-situ, elev. change','Wouters et al. (2002-2016):\ngravi.','Ciracì et al. (2002-2020):\ngravi.','Zemp et al. (2006-2016):\nin-situ, elev. change','This study (corresp. period):\nelev. change'],ncol=3,handlelength=1,framealpha=1,loc='upper right',labelspacing=0.5,handler_map=hm,borderpad=0.4)
+ax.legend([(p3[0],p4[0]),(p5[0],p6[0]),(p7[0], p8[0]),(p1[0], p2[0]),p0], ['Gardner et al.'+'$^{5}$'+ ' (2003-2009):\ngravi., in-situ, elev. change','Wouters et al. '+'$^{19}$'+'(2002-2016):\ngravi.','Ciracì et al.'+'$^{20}$'+' (2002-2020):\ngravi.','Zemp et al.'+'$^{21}$'+' (2006-2016):\nin-situ, elev. change','This study (corresp. period):\nelev. change'],ncol=3,handlelength=1,framealpha=1,loc='upper right',labelspacing=0.5,handler_map=hm,borderpad=0.4)
 # ax.yaxis.grid(True,linestyle='--')
 
 reg_dir = '/home/atom/ongoing/work_worldwide/vol/reg'
@@ -341,7 +341,7 @@ p12= ax.plot([], [], color=plt.cm.Greys(0.9), linewidth=2)
 p13 = ax.fill([], [], color=plt.cm.Greys(0.9), alpha=0.5)
 
 hm = {p0: HandlerErrorbar(xerr_size=0.9), p4[0]: HandlerPatch(patch_func=make_legend_polygon), p2[0]: HandlerPatch(patch_func=make_legend_polygon), p6[0]: HandlerPatch(patch_func=make_legend_polygon),p8[0]: HandlerPatch(patch_func=make_legend_polygon), p13[0]: HandlerPatch(patch_func=make_legend_polygon), p11[0]: HandlerPatch(patch_func=make_legend_polygon)}
-ax1.legend([(p3[0],p4[0]),(p5[0],p6[0]),(p7[0], p8[0]),(p1[0], p2[0]),(p10[0],p11[0]),(p12[0],p13[0])], ['Gardner et al.','Wouters et al.','Ciracì et al.','Zemp et al.','This study (yearly)','This study (5-year)'],handlelength=1,framealpha=1,loc=(0.35,0.815),ncol=2,labelspacing=1,handler_map=hm,borderpad=0.6)
+ax1.legend([(p3[0],p4[0]),(p5[0],p6[0]),(p7[0], p8[0]),(p1[0], p2[0]),(p10[0],p11[0]),(p12[0],p13[0])], ['Gardner et al.'+'$^{5}$','Wouters et al.'+'$^{19}$','Ciracì et al.'+'$^{20}$','Zemp et al.'+'$^{21}$','This study (yearly)','This study (5-year)'],handlelength=1,framealpha=1,loc=(0.35,0.815),ncol=2,labelspacing=1,handler_map=hm,borderpad=0.6)
 
 
-# plt.savefig('/home/atom/ongoing/work_worldwide/figures/revised/Figure_3.png',dpi=400)
+plt.savefig('/home/atom/ongoing/work_worldwide/figures/revised/Figure_3_rev2.png',dpi=400)

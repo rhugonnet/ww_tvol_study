@@ -2,7 +2,7 @@
 @author: hugonnet
 stack ASTER, ArcticDEM and REMA DEMs by 1x1° tiles + fit GP time series at monthly resolution
 """
-from __future__ import print_function
+
 import os
 import sys
 os.environ["OMP_NUM_THREADS"] = "1"  # export OMP_NUM_THREADS=4

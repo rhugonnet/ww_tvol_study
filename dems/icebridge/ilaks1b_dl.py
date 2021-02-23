@@ -23,7 +23,7 @@ download all ILAKS1B data
 #    machine urs.earthdata.nasa.gov login myusername password mypassword
 # where 'myusername' and 'mypassword' are your Earthdata credentials.
 
-from __future__ import print_function
+
 
 import base64
 import itertools

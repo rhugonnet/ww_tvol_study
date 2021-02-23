@@ -2,7 +2,7 @@
 @author: hugonnet
 retrieve stats of Cross (X), Along (A) and Jitter (J) corrections for Fig. S1
 """
-from __future__ import print_function
+
 from glob import glob
 import os
 import pandas as pd

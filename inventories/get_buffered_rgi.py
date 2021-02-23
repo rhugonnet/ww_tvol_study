@@ -2,7 +2,7 @@
 @author: hugonnet
 buffer RGI: 10 km for processing stable terrain in GP series, and 200 km for display on Figures
 """
-from __future__ import print_function
+
 import gdal, ogr, osr
 import pyddem.vector_tools as ot
 import numpy as np

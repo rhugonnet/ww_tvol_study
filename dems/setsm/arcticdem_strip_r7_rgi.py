@@ -2,7 +2,7 @@
 @author: hugonnet
 download, extract, reproject and pairwise-coregister all ArcticDEM 2m strips intersecting glaciers
 """
-from __future__ import print_function
+
 import os, sys, shutil
 from subprocess import Popen
 sys.path.append('/home/echos/hugonnet/code/devel/rh_pygeotools')

@@ -2,7 +2,7 @@
 @author: hugonnet
 get table of glacier number and areas for Table S2
 """
-from __future__ import print_function
+
 import os
 import pandas as pd
 import numpy as np

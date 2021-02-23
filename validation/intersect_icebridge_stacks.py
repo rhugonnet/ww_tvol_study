@@ -2,7 +2,7 @@
 @author: hugonnet
 compute elevation differences between IceBridge and elevation time series, store parameters of interest
 """
-from __future__ import print_function
+
 import os
 import pyddem.tdem_tools as tt
 from glob import glob

@@ -2,7 +2,7 @@
 @author: hugonnet
 compile the differences to IceBridge and ICESat into elevation biases, standardized uncertainties, and elevation change biases for all regions and parameters of interest
 """
-from __future__ import print_function
+
 import os
 import pandas as pd
 import numpy as np
@@ -20,7 +20,6 @@ dir_valid = '/data/icesat/travail_en_cours/romain/results/valid'
 dir_valid_out = '/data/icesat/travail_en_cours/romain/results/valid_compil_stable'
 
 mkdir_p(dir_valid_out)
-
 
 list_fn_valid = glob(os.path.join(dir_valid,'*.csv'),recursive=True)
 

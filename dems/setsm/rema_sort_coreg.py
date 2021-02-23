@@ -2,7 +2,7 @@
 @author: hugonnet
 sort by UTM zone and co-register to TanDEM-X all REMA enlarged strips
 """
-from __future__ import print_function
+
 import os, sys, shutil
 os.environ["OMP_NUM_THREADS"] = "1"  # export OMP_NUM_THREADS=4
 os.environ["OPENBLAS_NUM_THREADS"] = "1"  # export OPENBLAS_NUM_THREADS=4

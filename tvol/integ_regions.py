@@ -2,7 +2,7 @@
 @author: hugonnet
 integrate per-glacier volume from elevation time series, aggregate spatially by tiles, regions, global and integrate temporally for 1-, 2-, 4-, 5-, 10- and 20-year periods
 """
-from __future__ import print_function
+
 import os
 import pyddem.tdem_tools as tt
 from glob import glob
@@ -10,7 +10,7 @@ import numpy as np
 
 world_data_dir = '/calcul/santo/hugonnet/worldwide/'
 # list_regions = os.listdir(world_data_dir)
-results_dir = '/data/icesat/travail_en_cours/romain/results/vol4'
+results_dir = '/data/icesat/travail_en_cours/romain/results/vol_final'
 # results_dir = '/home/atom/ongoing/work_worldwide/vol/reg'
 feat_id='RGIId'
 tlim = None
@@ -29,7 +29,7 @@ for region in list_regions:
 
     print('Working on region: '+region)
 
-    #integrate glaciers globally
+    # integrate glaciers globally
     fn_shp = glob(os.path.join(dir_shp,'**/*'+region+'*.shp'),recursive=True)[0]
     dir_stack = os.path.join(world_data_dir, region, 'stacks')
     list_fn_stack = glob(os.path.join(dir_stack, '**/*_final.nc'), recursive=True)
@@ -55,6 +55,7 @@ for fn_base in list_fn_base:
     tt.df_region_to_multann(infile_reg, fn_tarea=fn_tarea)
 
 # #aggregate worldwide by tile of 1x1°
-list_fn_base = glob(os.path.join(results_dir,'dh_*_base.csv'))
-print(list_fn_base)
-tt.df_all_base_to_tile(list_fn_base,fn_base,tile_size=1,nproc=nproc)
+# list_fn_base = glob(os.path.join(results_dir,'dh_*_base.csv'))
+list_fn_base_contiguous = [os.path.join(results_dir,'dh_'+region+'_int_base.csv') for region in list_regions]
+print(list_fn_base_contiguous)
+tt.df_all_base_to_tile(list_fn_base_contiguous,fn_base,tile_size=1,nproc=nproc)

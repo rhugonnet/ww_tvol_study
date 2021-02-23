@@ -1,10 +1,10 @@
-from __future__ import print_function
+
 import os
 from glob import glob
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-
+z
 fig = plt.figure(figsize=(18,13))
 
 grid = plt.GridSpec(18, 10, wspace=2, hspace=3.5)

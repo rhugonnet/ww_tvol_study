@@ -2,7 +2,7 @@
 @author: hugonnet
 aggregate results by subregion for Fig. 1
 """
-from __future__ import print_function
+
 import os, sys
 import numpy as np
 import pandas as pd
@@ -10,17 +10,19 @@ import gdal, ogr
 from glob import glob
 import pyddem.tdem_tools as tt
 # regions_shp = '/home/atom/data/inventory_products/RGI/00_rgi60/00_rgi60_regions/regions_split_adaptedHMA.shp'
-regions_shp = '/data/icesat/travail_en_cours/romain/data/outlines/rgi60/00_rgi60_O1Regions.shp'
+# regions_shp = '/data/icesat/travail_en_cours/romain/data/outlines/rgi60/00_rgi60_O1Regions.shp'
+regions_shp = '/data/icesat/travail_en_cours/romain/data/outlines/rgi60/regions_split_adaptedHMA.shp'
 
-# outfile = '/home/atom/ongoing/work_worldwide/vol/aggreg_subregions.csv'
-outfile = '/data/icesat/travail_en_cours/romain/results/figures/subreg_multann_O1_err.csv'
+# outfile = '/home/atom/ongoing/work_worldwide/vol/aggreg_subregions_fig1.csv'
+# outfile = '/data/icesat/travail_en_cours/romain/results/figures/subreg_multann_O1_err.csv'
+outfile = '/data/icesat/travail_en_cours/romain/results/vol_final/subreg_fig1.csv'
 
 # main_dir = '/home/atom/proj/ww_tvol_study/worldwide/'
 main_dir = '/data/icesat/travail_en_cours/romain/ww_tvol_study/worldwide'
 rgi_naming_txt=os.path.join(main_dir,'rgi_neighb_merged_naming_convention.txt')
 
 # int_dir = '/home/atom/ongoing/work_worldwide/vol/'
-int_dir = '/data/icesat/travail_en_cours/romain/results/vol4'
+int_dir = '/data/icesat/travail_en_cours/romain/results/vol_final'
 text_file = open(rgi_naming_txt, 'r')
 rgi_list = text_file.readlines()
 int_list = [os.path.join(int_dir,'dh_'+rgi[:-1].split('rgi60')[0] + 'rgi60'+'_int_base.csv') for rgi in rgi_list]
@@ -89,7 +91,7 @@ for feature in layer_in:
                 if len(df_subreg_int)==0:
                     continue
 
-                df_subreg_reg = tt.aggregate_int_to_all(df_subreg_int,get_corr_err=True)
+                df_subreg_reg = tt.aggregate_int_to_all(df_subreg_int,get_corr_err=False)
                 df_subreg_reg['time'] = df_subreg_reg.index.values
 
                 if len(df_subreg_reg) == 0:

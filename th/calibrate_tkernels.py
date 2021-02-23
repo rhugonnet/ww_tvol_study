@@ -2,7 +2,7 @@
 @author: hugonnet
 draw empirical temporal variograms with categories of slope, elevation change rate, etc... (see fit_tools)
 """
-from __future__ import print_function
+
 import pyddem.fit_tools as ft
 import os
 from glob import glob

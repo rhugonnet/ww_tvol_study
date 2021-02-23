@@ -2,7 +2,7 @@
 @author: NSIDC/hugonnet
 use region polygons to select download links for IODEM3 data and write to csv file
 """
-from __future__ import print_function
+
 import gdal, ogr
 import os, sys, shutil
 import shapely.wkt

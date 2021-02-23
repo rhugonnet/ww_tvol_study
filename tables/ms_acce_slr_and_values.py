@@ -2,7 +2,7 @@
 @author: hugonnet
 derive all values present in the text of the manuscript: accelerations, SLR contributions, etc..
 """
-from __future__ import print_function
+
 import os, sys
 import numpy as np
 import pandas as pd
@@ -10,7 +10,7 @@ from glob import glob
 import pyddem.fit_tools as ft
 import pyddem.tdem_tools as tt
 
-reg_dir = '/home/atom/ongoing/work_worldwide/vol/reg'
+reg_dir = '/home/atom/ongoing/work_worldwide/vol/final'
 fn_tarea = '/home/atom/data/inventory_products/RGI/tarea_zemp.csv'
 list_fn_reg= [os.path.join(reg_dir,'dh_'+str(i).zfill(2)+'_rgi60_int_base_reg.csv') for i in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]]
 
@@ -59,6 +59,8 @@ glac_trend = df_g[df_g.period == '2000-01-01_2020-01-01'].dmdt.values[0]/361.8
 glac_trend_err = df_g[df_g.period == '2000-01-01_2020-01-01'].err_dmdt.values[0]/361.8
 
 print('Glacier mass loss totalled '+'{:.2f}'.format(df_g[df_g.period == '2000-01-01_2020-01-01'].dmdt.values[0])+' ± '+'{:.2f}'.format(2*df_g[df_g.period == '2000-01-01_2020-01-01'].err_dmdt.values[0])+ ' Gt yr-1')
+
+print('Glacier mass loss totalled '+'{:.3f}'.format(glac_trend)+' ± '+'{:.3f}'.format(2*glac_trend_err)+ ' mm of sea-level rise')
 
 contr_trend = -glac_trend/gmsl_trend*100
 contr_trend_err = -glac_trend/gmsl_trend*np.sqrt((gmsl_trend_err/gmsl_trend)**2+(glac_trend_err/glac_trend)**2)*100
@@ -198,6 +200,8 @@ contr_wna = (df_all[np.logical_and(df_all.reg==2,df_all.period=='2015-01-01_2020
 print('Contribution of Alaska to the accelerating regions: '+'{:.1f}'.format(contr_alaska)+' %')
 print('Contribution of HMA to the accelerating regions: '+'{:.1f}'.format(contr_hma)+' %')
 print('Contribution of WNA to the accelerating regions: '+'{:.1f}'.format(contr_wna)+' %')
+
+print('New Zealand thinning rates 2015-2019:'+'{:.2f}'.format(df_all[np.logical_and(df_all.reg==18,df_all.period=='2015-01-01_2020-01-01')].dhdt.values[0])+' ± '+'{:.2f}'.format(2*df_all[np.logical_and(df_all.reg==18,df_all.period=='2015-01-01_2020-01-01')].err_dhdt.values[0])+' m yr-1')
 
 #SENSIBILITY
 

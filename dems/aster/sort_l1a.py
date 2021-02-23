@@ -10,7 +10,7 @@ for a final architecture of: /datadir/region/aster_l1a/utm_zone/strips/l1a.zip +
 
 l1a data with no stereo bands is sorted in a separate folders
 """
-from __future__ import print_function
+
 import sys
 from osgeo import ogr
 import os

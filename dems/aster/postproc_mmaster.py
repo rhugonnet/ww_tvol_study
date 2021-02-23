@@ -2,7 +2,7 @@
 @author: hugonnet
 postprocessing for bias-correction and co-registration of ASTER DEMs after MicMac stereo
 """
-from __future__ import print_function
+
 import os, sys, shutil
 from subprocess import Popen
 os.environ["OMP_NUM_THREADS"] = "1" # export OMP_NUM_THREADS=4

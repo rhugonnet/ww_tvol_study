@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import os, sys
 import numpy as np
 import pandas as pd
@@ -6,9 +6,8 @@ import pyddem.tdem_tools as tt
 from glob import glob
 from collections import OrderedDict
 
-reg_dir = '/home/atom/ongoing/work_worldwide/vol/reg'
-fn_o1 = '/home/atom/ongoing/work_worldwide/vol/tile/subreg_multann_O1_err.csv'
-out_csv = '/home/atom/ongoing/work_worldwide/tables/revised/ED_Table_3.csv'
+fn_o1 = '/home/atom/ongoing/work_worldwide/vol/final/subreg_multann_O1_err.csv'
+out_csv = '/home/atom/ongoing/work_worldwide/tables/final/ED_Table_3.csv'
 
 df_in = pd.read_csv(fn_o1)
 
@@ -102,7 +101,7 @@ for k in range(len(list_df)):
     # df_out['dm_err_sub'] = column_str_dm_err
     df_out['rel_inc'] = column_str_rel_inc
 
-    areas = ['{:.0f}'.format(df_full_p.area.values[i] / 1000000) for i in range(len(df_full_p))]
+    areas = ['{:,.0f}'.format(df_full_p.area.values[i] / 1000000) for i in range(len(df_full_p))]
     df_out.insert(loc=0, column='region', value=region_names)
     df_out.insert(loc=1, column='area', value=areas)
 

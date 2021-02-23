@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.path as mpath
@@ -543,7 +543,7 @@ for reg in list_reg:
     add_color_ribbon_circ(np.array([df_reg.lon_reg.values[-1],df_reg.lat_reg.values[-1]]),yearly_dh,df_reg[np.logical_and(df_reg.category=='all',df_reg.period=='2000-01-01_2020-01-01')].dmdt.values[-1]*1000,valid_obs_py,label=reg,perc_dm_tw=perc_dm_tw,perc_area_tw=perc_area_tw,text=list_text[list_reg.index(reg)],offset=list_offsets[list_reg.index(reg)],height_ribbon=350000)
 
 df['area_valid_obs_py'] = df['valid_obs_py'] * df['area']
-df_world = df.groupby(('period','category'))['dvoldt','dmdt','tarea','area','area_valid_obs_py'].sum()
+df_world = df.groupby(['period','category'])['dvoldt','dmdt','tarea','area','area_valid_obs_py'].sum()
 df_world['valid_obs_py'] = df_world['area_valid_obs_py'] / df_world['area']
 df_world['dhdt'] = df_world['dvoldt'] / df_world['tarea']
 df_world['period'] = df_world.index.get_level_values(0)
@@ -574,7 +574,7 @@ else:
     perc_dm_tw = 0.
 
 add_color_ribbon_circ(np.array([-126,-30]),yearly_dh_world,df_world[np.logical_and(df_world.category=='all',df_world.period=='2000-01-01_2020-01-01')].dmdt.values[-1]*1000,valid_obs_py_world,label='world',perc_dm_tw=perc_dm_tw,perc_area_tw=perc_area_tw,text='Global',width_ribbon=200000,height_ribbon=2000000)
-plt.savefig('/home/atom/ongoing/work_worldwide/figures/Figure_1_v2_main.png',dpi=400,transparent=True)
+plt.savefig('/home/atom/ongoing/work_worldwide/figures/final/Figure_1_main.png',dpi=400,transparent=True)
 
 
 
@@ -583,7 +583,7 @@ plt.savefig('/home/atom/ongoing/work_worldwide/figures/Figure_1_v2_main.png',dpi
 fig_width_inch=19.
 fig = plt.figure(figsize=(fig_width_inch,fig_width_inch/1.9716))
 
-out_png = '/home/atom/ongoing/work_worldwide/figures/Figure_1_v2_legend.png'
+out_png = '/home/atom/ongoing/work_worldwide/figures/final/Figure_1_legend.png'
 axleg2 = fig.add_axes([0,0,1,1],projection=ccrs.Robinson(),label='legend2')
 axleg2.outline_patch.set_linewidth(0)
 

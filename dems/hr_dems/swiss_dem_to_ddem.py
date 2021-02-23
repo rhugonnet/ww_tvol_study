@@ -2,7 +2,7 @@
 @author: hugonnet
 derive DEM differences from SwissTopo DEMs (high-resolution Alps DEMs)
 """
-from __future__ import print_function
+
 
 #MATTHIAS DEMs:
 #gdalwarp -s_srs EPSG:21781 -t_srs EPSG:32632 -of GTiff -r bilinear dhm_alet2009.grid dhm_alet2009_utm.tif

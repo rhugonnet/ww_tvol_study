@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,9 +8,10 @@ from matplotlib.dates import MonthLocator, YearLocator
 from glob import glob
 from matplotlib.legend_handler import HandlerErrorbar, HandlerPatch, HandlerBase
 import matplotlib.patches as mpatches
+import matplotlib.dates as mdates
 
-dir_wouters = '/home/atom/data/validation/Wouters_2019/GRACE_w_GIA_err.txt'
-dir_zemp = '/home/atom/data/validation/Zemp_2019/correction/Zemp_etal_results_regions_global_v11'
+dir_wouters = '/home/atom/data/other/Wouters_2019/GRACE_w_GIA_err.txt'
+dir_zemp = '/home/atom/data/other/Zemp_2019/correction/Zemp_etal_results_regions_global_v11'
 dir_hugonnet = '/home/atom/ongoing/work_worldwide/vol/reg'
 
 region_wouters = ['Alaska','Western_Canada_and_US','Arctic_Canada_North','Arctic_Canada_South',None,'Iceland','Svalbard','Scandinavia','Arctic_Russia','North_Asia','Central_Europe','Caucasus','HMA','Low_Latitudes','Southern_Andes','New_Zealand',None,None]
@@ -46,7 +47,7 @@ for i in np.arange(len(region_zemp)):
         fn_zemp = glob(os.path.join(dir_zemp,'*_'+str(region_zemp[i])+'_*'))[0]
         df_z = pd.read_csv(fn_zemp, header=26)
     else:
-        fn_zemp = '/home/atom/data/validation/Zemp_2019/correction/Zemp_etal_results_regions_global_v11/Zemp_etal_results_global.csv'
+        fn_zemp = '/home/atom/data/other/Zemp_2019/correction/Zemp_etal_results_regions_global_v11/Zemp_etal_results_global.csv'
         df_z = pd.read_csv(fn_zemp, header=18)
 
 
@@ -97,7 +98,7 @@ for i in np.arange(len(region_zemp)):
         p3 = ax.errorbar(df_tot.time.values.astype('datetime64[D]')[9::12],
                          df_tot['dm'].values[9::12] - df_tot['dm'].values[33],
                          2 * np.sqrt(df_tot['err_dm'].values[12::12] ** 2 + df_tot['err_dm'].values[24] ** 2),
-                         label='This study (annual)', color='black', fmt='x')
+                         label='This study (annual)', color='black', fmt='x',elinewidth=2)
 
     ax.set_xlim([np.datetime64('2001-12-01'),np.datetime64('2017-01-01')])
     if i+1 in [2,8,10,11,12,14,16]:
@@ -109,6 +110,7 @@ for i in np.arange(len(region_zemp)):
     yloc = YearLocator(2)
     # mloc = MonthLocator()
     ax.xaxis.set_major_locator(yloc)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
     # ax.xaxis.set_minor_locator(mloc)
     ax.grid(True)
     if i==0:
@@ -138,4 +140,4 @@ ax.tick_params(labelcolor='none', top=False, bottom=False, left=False, right=Fal
 plt.xlabel('Year')
 plt.ylabel('Cumulative mass change (Gt)\n ')
 
-plt.savefig('/home/atom/ongoing/work_worldwide/figures/Figure_S14.png',dpi=400)
+plt.savefig('/home/atom/ongoing/work_worldwide/figures/revised/Figure_S7_2.png',dpi=400)

@@ -2,7 +2,7 @@
 @author: hugonnet
 convert ILAKS1B DEMs to point data per region
 """
-from __future__ import print_function
+
 import os
 import numpy as np
 import pandas as pd

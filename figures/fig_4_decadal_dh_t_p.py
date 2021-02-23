@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import matplotlib.path as mpath
@@ -99,7 +99,7 @@ df=pd.read_csv(in_csv)
 
 out_png = os.path.join(os.path.dirname(in_csv),'fig_5_'+os.path.splitext(os.path.basename(in_csv))[0]+'.png')
 
-tiles = [latlon_to_SRTMGL1_naming(df.lat.values[i]-0.5,df.lon.values[i]-0.5) for i in range(len(df))]
+tiles = [latlon_to_SRTMGL1_naming(df.lat.values[i]-0.5,df.lon.values[i]-180-0.5) for i in range(len(df))]
 areas = df.area.tolist()
 # areas = [area/1000000 for  area in areas]
 dhs = df.dh.tolist()

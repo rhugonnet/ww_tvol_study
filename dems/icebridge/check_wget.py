@@ -2,7 +2,7 @@
 @author: hugonnet
 check for wget errors in IODEM3 bulk download and write list of failed links for re-download if necessary
 """
-from __future__ import print_function
+
 import os
 import pandas as pd
 import csv
