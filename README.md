@@ -1,6 +1,6 @@
 # ww_tvol_study
 
-Code and results of Hugonnet et al. (202X), Accelerated global glacier mass loss in the early twenty-first century.
+Code and results of Hugonnet et al. (2021), *Accelerated global glacier mass loss in the early twenty-first century*, Nature.
 
 Below a short guide to: manipulate the dataset, reproduce the processing steps, and reproduce the figures and tables.
 
@@ -11,13 +11,18 @@ Below a short guide to: manipulate the dataset, reproduce the processing steps, 
 The dataset consists of:
 1. **Cumulative time series of volume and mass change** (.csv, *~500MB*) at an annual time step and **rates of volume 
 and mass changes** (.csv, *~3GB*) for successive 1-, 2-, 4-, 5-, 10- and 20-year periods of 2000-2019, both 
-for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and per-glacier, available at [TBC]().
+for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and per-glacier, available at [https://doi.org/10.5281/zenodo.4530314]().
 2. **Elevation change rasters** (.tif, *~15GB*) at 100 m posting for successive 5-, 10- and 20-year periods of 2000-2019,
- available at [TBC]().
-3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step, available at [TBC]().
+ available at [https://doi.org/10.5281/zenodo.4530314]().
+3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step will be available through NSIDC [TBC]().
 4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting, available at [TBC]().
 
 *Notes:*
+* *Global and regional series of specific (area-scaled) change presented throughout the article (e.g., mean elevation change) use
+time-varying areas (see Methods). Due to the lack of such estimates per individual glaciers, specific change per glacier is computed based on fixed areas. 
+Thus, only **global and regional direct mass change/volume change are consistent with the individual glacier contributions of a given region**.
+Specific rates must be manipulated with caution between the different levels of the dataset by using direct mass change/volume change, and
+later choosing an area to scale into specific rates, if desired.*
 * *Rates uncertainties over a specific period (e.g., 2004-2011) **need to be derived from the cumulative volume change
 time series**, due to the varying spatial correlation at each point in time (volume time series) and temporal correlation at the regional 
 scale assumed for certain uncertainties (density conversion).*
