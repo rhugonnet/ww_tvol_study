@@ -121,7 +121,7 @@ Some examples are given in *dataset/examples_figs/*, with figures directly below
 ```shell script
 ./dataset/example_figs/alike_fig_2_2by2.py
 ```
-![alt text](https://github.com/rhugonnet/ww_tvol_study/blob/main/dataset/example_figs/fig_2_2by2?raw=True)
+![alt text](https://github.com/rhugonnet/ww_tvol_study/blob/main/dataset/example_figs/fig_2_2by2.png?raw=True)
 
 
 **Number of valid observations per 100 m pixel per 5-year period on 1x1° tiles**
