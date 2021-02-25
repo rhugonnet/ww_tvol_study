@@ -1,6 +1,6 @@
 # ww_tvol_study
 
-Code and results of Hugonnet et al. (2021), *Accelerated global glacier mass loss in the early twenty-first century*, Nature.
+Code and results of **Hugonnet et al. (2021), *Accelerated global glacier mass loss in the early twenty-first century***. :earth_america:
 
 Below a short guide to: manipulate the dataset, reproduce the processing steps, and reproduce the figures and tables.
 
@@ -14,15 +14,15 @@ and mass changes** (.csv, *~3GB*) for successive 1-, 2-, 4-, 5-, 10- and 20-year
 for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and per-glacier, available at [https://doi.org/10.5281/zenodo.4530314]().
 2. **Elevation change rasters** (.tif, *~15GB*) at 100 m posting for successive 5-, 10- and 20-year periods of 2000-2019,
  available at [https://doi.org/10.5281/zenodo.4530314]().
-3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step will be available through NSIDC [TBC]().
+3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step (in time, should be available through NSIDC): [TBC]().
 4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting, available at [TBC]().
 
 *Notes:*
 * *Global and regional series of specific (area-scaled) change presented throughout the article (e.g., mean elevation change) use
 time-varying areas (see Methods). Due to the lack of such estimates per individual glaciers, specific change per glacier is computed based on fixed areas. 
 Thus, only **global and regional direct mass change/volume change are consistent with the individual glacier contributions of a given region**.
-Specific rates must be manipulated with caution between the different levels of the dataset by using direct mass change/volume change, and
-later choosing an area to scale into specific rates, if desired.*
+Regional/global rates must therefore be manipulated with caution by using direct mass change/volume change, and later choosing an area 
+to scale into specific rates, fixed or time-varying.*
 * *Rates uncertainties over a specific period (e.g., 2004-2011) **need to be derived from the cumulative volume change
 time series**, due to the varying spatial correlation at each point in time (volume time series) and temporal correlation at the regional 
 scale assumed for certain uncertainties (density conversion).*
@@ -113,12 +113,30 @@ Additional data might be necessary to run some of these scripts, such as a world
 [SRTM30_PLUS v8.0](https://researchdata.edu.au/global-hillshading-srtm30plus-source-ucsd/690579)), buffered RGI 6.0 
 outlines (see *inventories/*), or auxiliary files of the data analysis not shared through the dataset (available upon request).
 
-For example, the equivalent of Extended Data Fig. 7 colored by the number of valid observation by 5-year period 
-(instead of elevation change) and scaled to glacier area (instead of inversely scaled to uncertainties):
+For example, we can display the equivalent of Extended Data Fig. 7 colored by the number of valid observation by 5-year 
+period (instead of elevation change).
+Some examples are given in *dataset/examples_figs/*, with figures directly below:
 
-```python
-TBC
+**Number of observations per 5-year period on 1x1° tiles**
+```shell script
+./dataset/example_figs/alike_fig_ed7_datacov.py
 ```
+
+[alt text](https://github.com/rhugonnet/ww_tvol_study/tree/main/dataset/example_figs/ED_Figure_7_alike_datacov.png)
+
+**Mean elevation change rate per 5-year period on 0.5x0.5° tiles**
+```shell script
+./dataset/example_figs/alike_fig_ed7_05by05.py
+```
+
+[alt text](https://github.com/rhugonnet/ww_tvol_study/tree/main/dataset/example_figs/ED_Figure_7_alike_05by05.png)
+
+**Mean elevation change rate per 2-year period as a GIF**
+```shell script
+./dataset/example_figs/alike_fig_ed7_biennial_gif.py
+```
+[alt text](https://github.com/rhugonnet/ww_tvol_study/tree/main/dataset/example_figs/ED_Figure_7_biennial_gif.gif)
+
 
 As further guide, you will find comments directly present in the structure of the code, or in the detailed documentation of our packages ([pyddem](https://pyddem.readthedocs.io/en/latest/),
 [pymmaster](https://mmaster-workflows.readthedocs.io/en/latest/index.html)).
