@@ -122,23 +122,23 @@ Some examples are given in *dataset/examples_figs/*, with figures directly below
 ./dataset/example_figs/alike_fig_ed7_datacov.py
 ```
 
-![alt text](https://github.com/rhugonnet/ww_tvol_study/tree/main/dataset/example_figs/ED_Figure_7_alike_datacov.png)
+.. image:: dataset/example_figs/ED_Figure_7_alike_datacov.png
 
 **Mean elevation change rate per 5-year period on 0.5x0.5° tiles**
 ```shell script
 ./dataset/example_figs/alike_fig_ed7_05by05.py
 ```
 
-![alt text](https://github.com/rhugonnet/ww_tvol_study/tree/main/dataset/example_figs/ED_Figure_7_alike_05by05.png)
+.. image:: dataset/example_figs/ED_Figure_7_alike_05by05.png
 
 **Mean elevation change rate per 2-year period as a GIF**
 ```shell script
 ./dataset/example_figs/alike_fig_ed7_biennial_gif.py
 ```
-![alt text](https://github.com/rhugonnet/ww_tvol_study/tree/main/dataset/example_figs/ED_Figure_7_biennial_gif.gif)
+.. image:: dataset/example_figs/ED_Figure_7_alike_biennial_gif.gif
 
-
-As further guide, you will find comments directly present in the structure of the code, or in the detailed documentation of our packages ([pyddem](https://pyddem.readthedocs.io/en/latest/),
+As further guide, you will find comments directly present in the structure of the code, or in the
+ documentation of our packages ([pyddem](https://pyddem.readthedocs.io/en/latest/),
 [pymmaster](https://mmaster-workflows.readthedocs.io/en/latest/index.html)).
 
 **Enjoy !** :snowflake:
