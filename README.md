@@ -1,6 +1,6 @@
 # ww_tvol_study
 
-Code and results of **Hugonnet et al. (2021), *Accelerated global glacier mass loss in the early twenty-first century***. :earth_americas:
+Code and results of **Hugonnet et al. (2021), *Accelerated global glacier mass loss in the early twenty-first century***. :earth_americas: :snowflake:
 
 Below a short guide to: manipulate the dataset, reproduce the processing steps, and reproduce the figures and tables.
 
@@ -117,29 +117,34 @@ Additionally, we can also display other variables of the dataset. For example, u
 colored by the number of valid observation by 5-year period.
 Some examples are given in *dataset/examples_figs/*, with figures directly below:
 
-**Number of observations per 100 m pixel per 5-year period on 1x1° tiles**
+**Mean elevation change rate of full period on 2x2° tiles (4x2° for latitude higher than 60°, 4x4° for latitudes higher than 74°)**
+```shell script
+./dataset/example_figs/alike_fig_2_2by2.py
+```
+![alt text](https://github.com/rhugonnet/ww_tvol_study/blob/main/dataset/example_figs/fig_2_2by2?raw=True)
+
+
+**Number of valid observations per 100 m pixel per 5-year period on 1x1° tiles**
 ```shell script
 ./dataset/example_figs/alike_fig_ed7_datacov.py
 ```
-
-![alt text](https://github.com/rhugonnet/ww_tvol_study/blob/main/dataset/example_figs/ED_Figure_7_alike_datacov.png?raw=True)
+![alt text](https://github.com/rhugonnet/ww_tvol_study/blob/main/dataset/example_figs/fig_ed7_alike_datacov.png?raw=True)
 
 **Mean elevation change rate per 5-year period on 0.5x0.5° tiles**
 ```shell script
 ./dataset/example_figs/alike_fig_ed7_05by05.py
 ```
+![alt text](https://github.com/rhugonnet/ww_tvol_study/blob/main/dataset/example_figs/fig_ed7_alike_05by05.png?raw=true)
 
-![alt text](https://github.com/rhugonnet/ww_tvol_study/blob/main/dataset/example_figs/ED_Figure_7_alike_05by05.png?raw=true)
-
-**Mean elevation change rate per 2-year period as a GIF**
+**Mean elevation change rate per 2-year period on 1x1° tiles as a GIF**
 ```shell script
 ./dataset/example_figs/alike_fig_ed7_biennial_gif.py
 ```
-![alt text](https://github.com/rhugonnet/ww_tvol_study/blob/main/dataset/example_figs/ED_Figure_7_biennial_gif.gif?raw=True)
+![alt text](https://github.com/rhugonnet/ww_tvol_study/blob/main/dataset/example_figs/fig_ed7_biennial_gif.gif?raw=True)
 
 
 As further guide, you will find comments directly present in the structure of the code, or in the
  documentation of our packages ([pyddem](https://pyddem.readthedocs.io/en/latest/),
 [pymmaster](https://mmaster-workflows.readthedocs.io/en/latest/index.html)).
 
-**Enjoy !** :snowflake:
+**Enjoy !** :snowman:
