@@ -1,6 +1,6 @@
 # ww_tvol_study
 
-Code and results of **Hugonnet et al. (2021), *Accelerated global glacier mass loss in the early twenty-first century***. :earth_america:
+Code and results of **Hugonnet et al. (2021), *Accelerated global glacier mass loss in the early twenty-first century***. :earth_americas:
 
 Below a short guide to: manipulate the dataset, reproduce the processing steps, and reproduce the figures and tables.
 
@@ -113,11 +113,11 @@ Additional data might be necessary to run some of these scripts, such as a world
 [SRTM30_PLUS v8.0](https://researchdata.edu.au/global-hillshading-srtm30plus-source-ucsd/690579)), buffered RGI 6.0 
 outlines (see *inventories/*), or auxiliary files of the data analysis not shared through the dataset (available upon request).
 
-For example, we can display the equivalent of Extended Data Fig. 7 colored by the number of valid observation by 5-year 
-period (instead of elevation change).
+Additionally, we can also display other variables of the dataset. For example, using the equivalent of Extended Data Fig. 7 
+colored by the number of valid observation by 5-year period.
 Some examples are given in *dataset/examples_figs/*, with figures directly below:
 
-**Number of observations per 5-year period on 1x1° tiles**
+**Number of observations per 100 m pixel per 5-year period on 1x1° tiles**
 ```shell script
 ./dataset/example_figs/alike_fig_ed7_datacov.py
 ```
