@@ -117,7 +117,8 @@ Additionally, we can also display other variables of the dataset. For example, u
 colored by the number of valid observation by 5-year period.
 Some examples are given in *dataset/examples_figs/*, with figures directly below:
 
-**Mean elevation change rate of full period on 2x2° tiles (4x2° for latitude higher than 60°, 4x4° for latitudes higher than 74°)**
+**Mean elevation change rate of full period on 2x2° tiles with dot size as glacierized area 
+(4x2° for latitude higher than 60°, 4x4° for latitudes higher than 74°)**
 ```shell script
 ./dataset/example_figs/alike_fig_2_2by2.py
 ```
