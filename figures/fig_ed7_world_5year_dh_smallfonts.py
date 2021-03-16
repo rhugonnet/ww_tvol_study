@@ -94,7 +94,7 @@ def latlon_to_spec_center(lat,lon):
 # in_csv= '/home/atom/ongoing/work_worldwide/era5_analysis/final/mb_climate_1deg_change_20202010_20102000_all_700hpa_temp_seasonal.csv'
 
 # in_csv='/home/atom/ongoing/work_worldwide/vol/reg/dh_world_tiles_1deg.csv'
-in_csv = '/data/icesat/travail_en_cours/romain/results/vol4/dh_world_tiles_1deg.csv'
+in_csv = '/data/icesat/travail_en_cours/romain/results/vol_final/dh_world_tiles_1deg.csv'
 
 fig_width_inch = 3.1
 fig = plt.figure(figsize=(2*fig_width_inch, 2.35 * fig_width_inch / 1.9716))

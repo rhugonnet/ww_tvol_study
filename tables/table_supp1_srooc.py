@@ -2,7 +2,7 @@
 import os, sys
 import pandas as pd
 import numpy as np
-from pyddem.tdem_tools import aggregate_indep_regions, aggregate_all_to_period
+from pyddem.tdem_tools import aggregate_indep_regions_rates, aggregate_all_to_period
 # in_ext = '/home/atom/ongoing/work_worldwide/tables/table_man_gard_zemp_wout.csv'
 # df_ext = pd.read_csv(in_ext)
 fn_tarea = '/home/atom/data/inventory_products/RGI/tarea_zemp.csv'
@@ -26,26 +26,26 @@ for fn_reg in list_fn_reg:
 df = pd.concat(list_df)
 
 df_s = df[df.comp=='srocc']
-df_global_srocc = aggregate_indep_regions(df_s)
+df_global_srocc = aggregate_indep_regions_rates(df_s)
 df_global_srocc['reg'] = 22
-df_noperiph_srocc = aggregate_indep_regions(df_s[~df_s.reg.isin([5, 19])])
+df_noperiph_srocc = aggregate_indep_regions_rates(df_s[~df_s.reg.isin([5, 19])])
 df_noperiph_srocc['reg'] = 23
-df_a_srocc = aggregate_indep_regions(df_s[df_s.reg.isin([1,3,4,5,6,7,8,9])])
+df_a_srocc = aggregate_indep_regions_rates(df_s[df_s.reg.isin([1, 3, 4, 5, 6, 7, 8, 9])])
 df_a_srocc['reg'] = 24
-df_m_srocc = aggregate_indep_regions(df_s[df_s.reg.isin([1,2,6,8,10,11,12,21,16,17,18])])
+df_m_srocc = aggregate_indep_regions_rates(df_s[df_s.reg.isin([1, 2, 6, 8, 10, 11, 12, 21, 16, 17, 18])])
 df_m_srocc['reg'] = 25
 df_srocc_total = pd.concat([df_s, df_global_srocc, df_noperiph_srocc,df_a_srocc,df_m_srocc])
 df_srocc_total['comp'] = 'srocc'
 df_srocc_total.period = df[df.comp=='srocc'].period.values[0]
 
 df_f = df[df.comp=='full']
-df_global_full = aggregate_indep_regions(df_f)
+df_global_full = aggregate_indep_regions_rates(df_f)
 df_global_full['reg'] = 22
-df_noperiph_full = aggregate_indep_regions(df_f[~df_f.reg.isin([5, 19])])
+df_noperiph_full = aggregate_indep_regions_rates(df_f[~df_f.reg.isin([5, 19])])
 df_noperiph_full['reg'] = 23
-df_a_full = aggregate_indep_regions(df_f[df_f.reg.isin([1,3,4,5,6,7,8,9])])
+df_a_full = aggregate_indep_regions_rates(df_f[df_f.reg.isin([1, 3, 4, 5, 6, 7, 8, 9])])
 df_a_full['reg'] = 24
-df_m_full = aggregate_indep_regions(df_f[df_f.reg.isin([1,2,6,8,10,11,12,21,16,17,18])])
+df_m_full = aggregate_indep_regions_rates(df_f[df_f.reg.isin([1, 2, 6, 8, 10, 11, 12, 21, 16, 17, 18])])
 df_m_full['reg'] = 25
 df_full_total = pd.concat([df_f, df_global_full, df_noperiph_full,df_a_full,df_m_full])
 df_full_total['comp'] = 'full'

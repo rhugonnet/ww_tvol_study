@@ -30,11 +30,11 @@ list_df_all = []
 for period in periods:
 
     df_p = df[df.period == period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['reg']='global'
     df_global['period'] = period
 
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['reg']='global_noperiph'
     df_noperiph['period'] =period
 
@@ -108,11 +108,11 @@ list_df_all_yrly = []
 for period in periods:
 
     df_p = df_yrly[df_yrly.period == period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['reg']='global'
     df_global['period'] = period
 
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['reg']='global_noperiph'
     df_noperiph['period'] =period
 
@@ -153,7 +153,7 @@ print('Contribution of Southern Andes: '+'{:.1f}'.format(list_cont_perc[16])+' %
 
 print('Iceland specific rate: '+'{:.2f}'.format(df_tot[df_tot.reg==6].dmdtda.values[0])+' ± '+'{:.2f}'.format(2*df_tot[df_tot.reg==6].err_dmdtda.values[0])+' m w.e yr-1')
 
-df_nonpolar = tt.aggregate_indep_regions(df_tot[df_tot.reg.isin([10,11,12,16,17,18])])
+df_nonpolar = tt.aggregate_indep_regions_rates(df_tot[df_tot.reg.isin([10, 11, 12, 16, 17, 18])])
 
 print('Non-polar specific rate: '+'{:.2f}'.format(df_nonpolar.dmdtda.values[0])+' ± '+'{:.2f}'.format(2*df_nonpolar.err_dmdtda.values[0])+' m w.e yr-1')
 
@@ -178,8 +178,8 @@ print('Braun comparison: Tropics specific rate: '+'{:.2f}'.format(df_trp.dmdtda.
 
 #TEMPORAL VARIABILITIES
 
-df_ant_grl_00_04 = tt.aggregate_indep_regions(df_all[np.logical_and(df_all.reg.isin([5,19]),df_all.period=='2000-01-01_2005-01-01')])
-df_ant_grl_15_19 = tt.aggregate_indep_regions(df_all[np.logical_and(df_all.reg.isin([5,19]),df_all.period=='2015-01-01_2020-01-01')])
+df_ant_grl_00_04 = tt.aggregate_indep_regions_rates(df_all[np.logical_and(df_all.reg.isin([5, 19]), df_all.period == '2000-01-01_2005-01-01')])
+df_ant_grl_15_19 = tt.aggregate_indep_regions_rates(df_all[np.logical_and(df_all.reg.isin([5, 19]), df_all.period == '2015-01-01_2020-01-01')])
 
 print('GRL and ANT mass loss in 2000-2004:'+'{:.2f}'.format(df_ant_grl_00_04.dmdt.values[0])+' ± '+'{:.2f}'.format(2*df_ant_grl_00_04.err_dmdt.values[0])+' Gt yr-1')
 print('GRL and ANT mass loss in 2015-2019:'+'{:.2f}'.format(df_ant_grl_15_19.dmdt.values[0])+' ± '+'{:.2f}'.format(2*df_ant_grl_15_19.err_dmdt.values[0])+' Gt yr-1')
@@ -187,8 +187,8 @@ print('GRL and ANT mass loss in 2015-2019:'+'{:.2f}'.format(df_ant_grl_15_19.dmd
 print('Iceland thinning rates 2000-2004:'+'{:.2f}'.format(df_all[np.logical_and(df_all.reg==6,df_all.period=='2000-01-01_2005-01-01')].dhdt.values[0])+' ± '+'{:.2f}'.format(2*df_all[np.logical_and(df_all.reg==6,df_all.period=='2000-01-01_2005-01-01')].err_dhdt.values[0])+' m yr-1')
 print('Iceland thinning rates 2015-2019:'+'{:.2f}'.format(df_all[np.logical_and(df_all.reg==6,df_all.period=='2015-01-01_2020-01-01')].dhdt.values[0])+' ± '+'{:.2f}'.format(2*df_all[np.logical_and(df_all.reg==6,df_all.period=='2015-01-01_2020-01-01')].err_dhdt.values[0])+' m yr-1')
 
-df_acc_00_04 = tt.aggregate_indep_regions(df_all[np.logical_and(df_all.reg.isin([1,2,3,4,7,9,10,11,12,13,14,15,16,17,18]),df_all.period=='2000-01-01_2005-01-01')])
-df_acc_15_19 = tt.aggregate_indep_regions(df_all[np.logical_and(df_all.reg.isin([1,2,3,4,7,9,10,11,12,13,14,15,16,17,18]),df_all.period=='2015-01-01_2020-01-01')])
+df_acc_00_04 = tt.aggregate_indep_regions_rates(df_all[np.logical_and(df_all.reg.isin([1, 2, 3, 4, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]), df_all.period == '2000-01-01_2005-01-01')])
+df_acc_15_19 = tt.aggregate_indep_regions_rates(df_all[np.logical_and(df_all.reg.isin([1, 2, 3, 4, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]), df_all.period == '2015-01-01_2020-01-01')])
 
 print('Accelerating regions mass loss in 2000-2004:'+'{:.2f}'.format(df_acc_00_04.dmdt.values[0])+' ± '+'{:.2f}'.format(2*df_acc_00_04.err_dmdt.values[0])+' Gt yr-1')
 print('Accelerating regions mass loss in 2015-2019:'+'{:.2f}'.format(df_acc_15_19.dmdt.values[0])+' ± '+'{:.2f}'.format(2*df_acc_15_19.err_dmdt.values[0])+' Gt yr-1')

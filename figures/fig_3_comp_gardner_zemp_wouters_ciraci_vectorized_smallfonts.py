@@ -12,6 +12,7 @@ from glob import glob
 plt.rcParams.update({'font.size': 4.5})
 plt.rcParams.update({'lines.linewidth':0.35})
 plt.rcParams.update({'axes.linewidth':0.35})
+plt.rcParams.update({'pdf.fonttype':42})
 
 in_ext = '/home/atom/ongoing/work_worldwide/tables/table_man_gard_zemp_wout.csv'
 df_ext = pd.read_csv(in_ext)
@@ -166,9 +167,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)
@@ -178,12 +179,12 @@ df_per = pd.concat(list_df_per)
 
 
 df_g = df[df.tag=='gard']
-df_g_glo = tt.aggregate_indep_regions(df_g)
-df_g_per = tt.aggregate_indep_regions(df_g[~df_g.reg.isin([5, 19])])
+df_g_glo = tt.aggregate_indep_regions_rates(df_g)
+df_g_per = tt.aggregate_indep_regions_rates(df_g[~df_g.reg.isin([5, 19])])
 
 df_z = df[df.tag=='zemp']
-df_z_glo = tt.aggregate_indep_regions(df_z)
-df_z_per = tt.aggregate_indep_regions(df_z[~df_z.reg.isin([5, 19])])
+df_z_glo = tt.aggregate_indep_regions_rates(df_z)
+df_z_per = tt.aggregate_indep_regions_rates(df_z[~df_z.reg.isin([5, 19])])
 
 dmdtda_gard = -0.35
 err_gard = 0.04
@@ -200,9 +201,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)
@@ -227,9 +228,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)
@@ -283,9 +284,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)
@@ -304,9 +305,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)
@@ -354,4 +355,4 @@ l = ax1.legend([(p3[0],p4[0]),(p5[0],p6[0]),(p7[0], p8[0]),(p1[0], p2[0]),(p10[0
                ,handlelength=0.75,framealpha=0.8,loc=(0.35,0.725),ncol=2,labelspacing=1.35,handler_map=hm,borderpad=0.6)
 l.get_frame().set_linewidth(0.5)
 
-plt.savefig('/home/atom/ongoing/work_worldwide/figures/final/Figure_3.pdf',dpi=400)
+plt.savefig('/home/atom/ongoing/work_worldwide/figures/final/Figure_3_type42.pdf',dpi=400)

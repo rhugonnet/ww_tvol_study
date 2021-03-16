@@ -22,6 +22,7 @@ mpl.use('Agg')
 plt.rcParams.update({'font.size': 5})
 plt.rcParams.update({'lines.linewidth':0.5})
 plt.rcParams.update({'axes.linewidth':0.5})
+plt.rcParams.update({'pdf.fonttype':42})
 
 #
 # main_dir = '/home/atom/proj/ww_tvol_study/worldwide/'
@@ -39,7 +40,7 @@ fn_land = '/data/icesat/travail_en_cours/romain/figures/ne_50m_land.shp'
 main_dir = '/data/icesat/travail_en_cours/romain/ww_tvol_study/worldwide/'
 fn_hs = '/data/icesat/travail_en_cours/romain/figures/world_robin_rs.tif'
 shp_buff = '/data/icesat/travail_en_cours/romain/figures/rgi60_buff_diss.shp'
-out_png = '/data/icesat/travail_en_cours/romain/results/figures/Figure_2_main.pdf'
+out_png = '/data/icesat/travail_en_cours/romain/results/figures/Figure_2_main_type42.pdf'
 in_csv = '/data/icesat/travail_en_cours/romain/results/vol_final/dh_world_tiles_1deg.csv'
 
 

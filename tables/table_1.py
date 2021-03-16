@@ -32,11 +32,11 @@ list_df_all = []
 for period in periods:
 
     df_p = df[df.period == period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['reg']='global'
     df_global['period'] = period
 
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['reg']='global_noperiph'
     df_noperiph['period'] =period
 

@@ -159,9 +159,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)
@@ -171,12 +171,12 @@ df_per = pd.concat(list_df_per)
 
 
 df_g = df[df.tag=='gard']
-df_g_glo = tt.aggregate_indep_regions(df_g)
-df_g_per = tt.aggregate_indep_regions(df_g[~df_g.reg.isin([5, 19])])
+df_g_glo = tt.aggregate_indep_regions_rates(df_g)
+df_g_per = tt.aggregate_indep_regions_rates(df_g[~df_g.reg.isin([5, 19])])
 
 df_z = df[df.tag=='zemp']
-df_z_glo = tt.aggregate_indep_regions(df_z)
-df_z_per = tt.aggregate_indep_regions(df_z[~df_z.reg.isin([5, 19])])
+df_z_glo = tt.aggregate_indep_regions_rates(df_z)
+df_z_per = tt.aggregate_indep_regions_rates(df_z[~df_z.reg.isin([5, 19])])
 
 dmdtda_gard = -0.35
 err_gard = 0.04
@@ -193,9 +193,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)
@@ -220,9 +220,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)
@@ -275,9 +275,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)
@@ -296,9 +296,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)

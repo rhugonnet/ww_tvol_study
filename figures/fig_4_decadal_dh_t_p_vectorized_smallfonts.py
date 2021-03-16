@@ -23,6 +23,7 @@ mpl.use('Agg')
 plt.rcParams.update({'font.size': 5})
 plt.rcParams.update({'lines.linewidth':0.5})
 plt.rcParams.update({'axes.linewidth':0.5})
+plt.rcParams.update({'pdf.fonttype':42})
 
 # shp_buff = '/home/atom/data/inventory_products/RGI/00_rgi60/rgi60_buff_diss.shp'
 # shp_buff = '/data/icesat/travail_en_cours/romain/figures/rgi60_buff_diss.shp'
@@ -667,7 +668,7 @@ for i in range(len(list_anom)):
 
 
 # out_png = '/home/atom/ongoing/work_worldwide/figures/final/Figure_4_newdata.pdf'
-out_png = '/data/icesat/travail_en_cours/romain/results/figures/Figure_4.pdf'
+out_png = '/data/icesat/travail_en_cours/romain/results/figures/Figure_4_type42.pdf'
 plt.savefig(out_png,dpi=400)
 
 print('Figure saved.')

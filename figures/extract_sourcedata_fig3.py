@@ -42,9 +42,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)
@@ -65,9 +65,9 @@ list_df_per = []
 for i in range(len(tlims)-1):
     period = str(tlims[i])+'_'+str(tlims[i+1])
     df_p = df_all[df_all.period==period]
-    df_global = tt.aggregate_indep_regions(df_p)
+    df_global = tt.aggregate_indep_regions_rates(df_p)
     df_global['period']=period
-    df_noperiph = tt.aggregate_indep_regions(df_p[~df_p.reg.isin([5,19])])
+    df_noperiph = tt.aggregate_indep_regions_rates(df_p[~df_p.reg.isin([5, 19])])
     df_noperiph['period']=period
 
     list_df_glob.append(df_global)

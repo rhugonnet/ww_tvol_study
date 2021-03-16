@@ -27,6 +27,8 @@ plt.rcParams.update({'font.size': 5})
 plt.rcParams.update({'lines.linewidth':0.5})
 plt.rcParams.update({'axes.linewidth':0.5})
 # plt.rcParams.update({'ticks.linewidth':0.5})
+plt.rcParams.update({'pdf.fonttype':42})
+
 
 fs_moyen = 5.5
 fs_max = 6
@@ -611,14 +613,14 @@ else:
 add_color_ribbon_circ(np.array([-126,-30]),yearly_dh_world,df_world[np.logical_and(df_world.category=='all',df_world.period=='2000-01-01_2020-01-01')].dmdt.values[-1]*1000,valid_obs_py_world,label='world',perc_dm_tw=perc_dm_tw,perc_area_tw=perc_area_tw,text='Global',width_ribbon=200000,height_ribbon=2000000)
 # ax.set_rasterized(True)
 
-plt.savefig('/home/atom/ongoing/work_worldwide/figures/final/Figure_1_main.pdf',dpi=400,transparent=True)
+plt.savefig('/home/atom/ongoing/work_worldwide/figures/final/Figure_1_main_type42.pdf',dpi=400,transparent=True)
 
 
 #LEGEND
 fig_width_inch=7.2
 fig = plt.figure(figsize=(fig_width_inch,fig_width_inch/1.9716))
 
-out_png = '/home/atom/ongoing/work_worldwide/figures/final/Figure_1_legend.pdf'
+out_png = '/home/atom/ongoing/work_worldwide/figures/final/Figure_1_legend_type42.pdf'
 axleg2 = fig.add_axes([0,0,1,1],projection=ccrs.Robinson(),label='legend2')
 axleg2.outline_patch.set_linewidth(0)
 
