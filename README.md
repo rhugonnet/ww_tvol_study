@@ -60,24 +60,44 @@ Scripts for selecting or manipulating the dataset at various scales are located 
 
 Below a few examples:
 
-**1. Aggregating volume change over a specific regional shapefile and deriving rates for specific time periods**
+```python
+import pyddem.tdem_tools as tt
+import pyddem.fit_tools as ft
+import numpy as np
+#filename to file containing RGI metadata for all glaciers
+fn_base = '/path/to/base_rgi.csv'
+#filename to file containing our estimates for all glaciers
+fn_res = '/path/to/dh_int_all.csv'
+```
+
+**1. Aggregating volume change over a specific regional shapefile: example HiMAP**
 
 :exclamation: *Propagation of errors can be CPU intensive, and might require running in parallel*
 
 ```python
-TBC
+#only need results from High Mountain Asia
+fn_pergla = '/path/to/dh_13_14_15_rgi60_int_base.csv'
+#HiMAP subregions polygons
+fn_regions_shp='/path/to/00.HIMAP_regions/boundary_mountain_regions_hma_v3.shp'
+#fill the fields of interest to sort the HiMAP regions
+tt.aggregate_int_to_shp(df_pergla,fn_regions_shp,field_name='Primary_ID',code_name='Nr_Regio_1',nproc=32)
+
 ```
 
-**2. Aggregating volume change over 4x4° tiles**
+**2. Aggregating volume change over 4x4° tiles with 32 cores**
 
 ```python
-TBC
+list_tlim = [(np.datetime64('2002-01-01'),np.datetime64('2020-01-01')),(np.datetime64('2008-01-01'),np.datetime64('2014-01-01'))]
+tt.df_all_base_to_tile(fn_res,fn_base,list_tlim=list_tlim,tile_size=4,nproc=32)
 ```
 
-**3. Deriving and displaying elevation change time series from a time stack**
+**3. Displaying elevation change time series from a time stack**
 
 ```python
-TBC
+# fn_stack='/home/atom/ongoing/work_worldwide/figures/esapolar/N63W020_final.nc'
+
+fig, ims = ft.make_dh_animation(ds,fn_shp=fn_shp,t0=t0,month_a_year=1,dh_max=40,var='z',label='Elevation change since 2000 (m)')
+ft.write_animation(fig, ims, outfilename=out_gif,interval=500)
 ```
 
 **4. Extracting 2-year elevation change rates**
@@ -113,9 +133,9 @@ Additional data might be necessary to run some of these scripts, such as a world
 [SRTM30_PLUS v8.0](https://researchdata.edu.au/global-hillshading-srtm30plus-source-ucsd/690579)), buffered RGI 6.0 
 outlines (see *inventories/*), or auxiliary files of the data analysis not shared through the dataset (available upon request).
 
-Additionally, we can also display other variables of the dataset. For example, using the equivalent of Extended Data Fig. 7 
-colored by the number of valid observation by 5-year period.
-Some examples are given in *dataset/examples_figs/*, with figures directly below:
+Using the figure scripts, we can also display other variables of the dataset. For example, we can show the number of 
+valid observation by 5-year period on the same tiling than Extended Data Fig. 7.
+Some examples are available in *dataset/examples_figs/*, with resulting figures directly below:
 
 **Mean elevation change rate of full period on 2x2° tiles with dot size as glacierized area 
 (4x2° for latitude higher than 60°, 4x4° for latitudes higher than 74°)**
