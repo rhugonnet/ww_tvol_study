@@ -14,20 +14,18 @@ and mass changes** (.csv, *~3GB*) for successive 1-, 2-, 4-, 5-, 10- and 20-year
 for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and per-glacier, available at [https://doi.org/10.5281/zenodo.4530314]().
 2. **Elevation change rasters** (.tif, *~15GB*) at 100 m posting for successive 5-, 10- and 20-year periods of 2000-2019,
  available at [https://doi.org/10.5281/zenodo.4530314]().
-3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step (in time, should be available through NSIDC): [TBC]().
+3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step (in time, might be available through NSIDC): [TBC]().
 4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting, available at [TBC]().
 
 *Notes:*
-* *Global and regional series of specific (area-scaled) change presented throughout the article (e.g., mean elevation change) use
-time-varying areas (see Methods). Due to the lack of such estimates per individual glaciers, specific change per glacier is computed based on fixed areas. 
-Thus, only **global and regional direct mass change/volume change are consistent with the individual glacier contributions of a given region**.
-Regional/global rates must therefore be manipulated with caution by using direct mass change/volume change, and later choosing an area 
-to scale into specific rates, fixed or time-varying.*
+* *Global and regional series of **specific** (area-scaled) change presented throughout the article (e.g., mean elevation change) use estimates of
+**time-varying glacier areas** (see Methods). Due to the lack of such estimates per individual glaciers, **specific** change per glacier is computed with **fixed areas**. 
+This means that only **global and regional direct mass/volume change are consistent with the individual glacier contributions of a given region**.*
+* ***Cumulative mass change series and rates for periods shorter than 5 years** are provided, but **do not respect assumptions of density conversion** 
+of [Huss (2013)](https://tc.copernicus.org/articles/7/877/2013/), possibly resulting in too small uncertainties.*
 * *Rates uncertainties over a specific period (e.g., 2004-2011) **need to be derived from the cumulative volume change
 time series**, due to the varying spatial correlation at each point in time (volume time series) and temporal correlation at the regional 
 scale assumed for certain uncertainties (density conversion).*
-* *Mass change **cumulative series and rates for periods shorter than 5 years** are provided, but **do not respect assumptions of density conversion** 
-of [Huss (2013)](https://tc.copernicus.org/articles/7/877/2013/), possibly resulting in too small uncertainties.*
 * ***Tile mass changes** (e.g., 1x1° grid) currently rely on per-glacier integrated volumes, aggregated according to 
 glacier outline centroids. Therefore, those changes **are not necessarily representative of mass change within the exact 
 spatial boundaries of the tile**. Deriving such changes is more complex and is not available yet (contact me for more details).* 
@@ -64,10 +62,10 @@ Below a few examples:
 import pyddem.tdem_tools as tt
 import pyddem.fit_tools as ft
 import numpy as np
-#filename to file containing RGI metadata for all glaciers
+# filename of file containing RGI 6.0 metadata (updated for some regions in this study) for all glaciers
 fn_base = '/path/to/base_rgi.csv'
-#filename to file containing our estimates for all glaciers
-fn_res = '/path/to/dh_int_all.csv'
+# filename of file containing our estimates for all glaciers
+fn_gla = '/path/to/dh_int_all.csv'
 ```
 
 **1. Aggregating volume change over a specific regional shapefile: example HiMAP**
@@ -75,11 +73,11 @@ fn_res = '/path/to/dh_int_all.csv'
 :exclamation: *Propagation of errors can be CPU intensive, and might require running in parallel*
 
 ```python
-#only need results from High Mountain Asia
+# only need results from High Mountain Asia
 fn_pergla = '/path/to/dh_13_14_15_rgi60_int_base.csv'
-#HiMAP subregions polygons
+# HiMAP subregions polygons
 fn_regions_shp='/path/to/00.HIMAP_regions/boundary_mountain_regions_hma_v3.shp'
-#fill the fields of interest to sort the HiMAP regions
+# fill the fields of interest to sort the HiMAP regions
 tt.aggregate_int_to_shp(df_pergla,fn_regions_shp,field_name='Primary_ID',code_name='Nr_Regio_1',nproc=32)
 
 ```
@@ -87,6 +85,8 @@ tt.aggregate_int_to_shp(df_pergla,fn_regions_shp,field_name='Primary_ID',code_na
 **2. Aggregating volume change over 4x4° tiles with 32 cores**
 
 ```python
+# here you can specify periods of choice
+# default will derive all successive 1-,2-,4-,5-,10- and 20-year periods (not computing intensive, can be performed later on the cumulative series)
 list_tlim = [(np.datetime64('2002-01-01'),np.datetime64('2020-01-01')),(np.datetime64('2008-01-01'),np.datetime64('2014-01-01'))]
 tt.df_all_base_to_tile(fn_res,fn_base,list_tlim=list_tlim,tile_size=4,nproc=32)
 ```
@@ -95,7 +95,6 @@ tt.df_all_base_to_tile(fn_res,fn_base,list_tlim=list_tlim,tile_size=4,nproc=32)
 
 ```python
 # fn_stack='/home/atom/ongoing/work_worldwide/figures/esapolar/N63W020_final.nc'
-
 fig, ims = ft.make_dh_animation(ds,fn_shp=fn_shp,t0=t0,month_a_year=1,dh_max=40,var='z',label='Elevation change since 2000 (m)')
 ft.write_animation(fig, ims, outfilename=out_gif,interval=500)
 ```
