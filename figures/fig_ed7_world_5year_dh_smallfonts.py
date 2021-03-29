@@ -491,23 +491,23 @@ def add_compartment_world_map(fig,pos,anom=None,ymarg=None,label=None,label2=Non
 
     #Antarctic Peninsula
     bounds_ap = [-5500000,-3400000,-8000000,-5900000]
-    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-0.735*xr,yb -0.06*yr, 2.7*xr, 2.7*yr],bounds=bounds_ap,label='AP',anom=anom,markup_sub='19a',sub_pos='lt',sub_adj=(30000,-170000))
+    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-0.735*xr,yb -0.06*yr, 2.7*xr, 2.7*yr],bounds=bounds_ap,label='AP',anom=anom,markup_sub='19A',sub_pos='lt',sub_adj=(30000,-170000))
 
     #Antarctic West
     bounds_aw=[-9500000,-5600000,-7930000,-7320000]
-    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-0.4205*xr, yb-0.1513*yr, 2.7*xr, 2.7*yr],bounds=bounds_aw,label='AW0',anom=anom,markup_sub='19a',sub_pos='lt',sub_adj=(70000,-15000))
+    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-0.4205*xr, yb-0.1513*yr, 2.7*xr, 2.7*yr],bounds=bounds_aw,label='AW0',anom=anom,markup_sub='19A',sub_pos='lt',sub_adj=(70000,-15000))
 
     #Antarctic East
     bounds_ae1 = [-1960000,2250000,-7700000,-7080000]
-    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-0.7087*xr, yb-0.1872*yr, 2.7*xr, 2.7*yr],bounds=bounds_ae1,label='AW',anom=anom,markup_sub='19c',sub_pos='lt',sub_adj=(0,-25000))
+    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-0.7087*xr, yb-0.1872*yr, 2.7*xr, 2.7*yr],bounds=bounds_ae1,label='AW',anom=anom,markup_sub='19C',sub_pos='lt',sub_adj=(0,-25000))
 
     #Antartic East 2
     bounds_ae2 = [2450000,7500000,-7570000,-6720000]
-    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-1.0585*xr, yb-0.113*yr, 2.7*xr, 2.7*yr],bounds=bounds_ae2,label='AW2',anom=anom,markup_sub='19e',sub_pos='rt',sub_adj=(-1075000,-45000))
+    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-1.0585*xr, yb-0.113*yr, 2.7*xr, 2.7*yr],bounds=bounds_ae2,label='AW2',anom=anom,markup_sub='19E',sub_pos='rt',sub_adj=(-1075000,-45000))
 
     #Antartic East 3
     bounds_ae3=[9430000,11900000,-8200000,-6770000]
-    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-1.2960*xr, yb-0.109*yr, 2.7*xr, 2.7*yr],bounds=bounds_ae3,label='AW3',anom=anom,markup_sub='19e',sub_pos='lm',sub_adj=(15000,0))
+    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-1.2960*xr, yb-0.109*yr, 2.7*xr, 2.7*yr],bounds=bounds_ae3,label='AW3',anom=anom,markup_sub='19E',sub_pos='lm',sub_adj=(15000,0))
 
     #South America
     bounds_sa = [-7340000,-5100000,-5900000,0]
@@ -527,16 +527,16 @@ def add_compartment_world_map(fig,pos,anom=None,ymarg=None,label=None,label2=Non
 
     #Kamchatka Krai
     bounds_kam = [11500000,13200000,5100000,6700000]
-    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-1.3991*xr, yb-1.73*yr, 2.7*xr, 2.7*yr],bounds=bounds_kam,label='Kam',anom=anom,markup_sub='10f',sub_pos='lb',sub_adj=(365000,15000))
+    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-1.3991*xr, yb-1.73*yr, 2.7*xr, 2.7*yr],bounds=bounds_kam,label='Kam',anom=anom,markup_sub='10F',sub_pos='lb',sub_adj=(365000,15000))
 
     #HMA and North Asia 1
     bounds_hma = [5750000,9550000,2650000,5850000]
-    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-1.216*xr,yb -1.5835*yr, 2.7*xr, 2.7*yr],bounds=bounds_hma,label='HMA',anom=anom,markup_sub='13-15\n& 10a',sub_pos='rt',sub_adj=(-20000,-100000))
+    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-1.216*xr,yb -1.5835*yr, 2.7*xr, 2.7*yr],bounds=bounds_hma,label='HMA',anom=anom,markup_sub='13-15\n& 10A',sub_pos='rt',sub_adj=(-20000,-100000))
 
     #Arctic
     bounds_arctic = [-6060000,6420000,6100000,8400000]
     poly_arctic = np.array([(-6050000,7650000),(-5400000,6800000),(-4950000,6400000),(-3870000,5710000),(-2500000,5710000),(-2000000,5720000),(1350000,5720000),(2300000,6600000),(6500000,6600000),(6500000,8400000),(-6050000,8400000),(-6050000,7650000)])
-    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-0.8675*xr, yb-1.715*yr, 2.7*xr, 2.7*yr],bounds=bounds_arctic,polygon=poly_arctic,label='Arctic',anom=anom,markup_sub='03-09\n& 10b',sub_pos='mt',sub_adj=(-200000,-820000))
+    add_inset(fig, [-179.99,179.99,-89.99,89.99], [xb-0.8675*xr, yb-1.715*yr, 2.7*xr, 2.7*yr],bounds=bounds_arctic,polygon=poly_arctic,label='Arctic',anom=anom,markup_sub='03-09\n& 10B',sub_pos='mt',sub_adj=(-200000,-820000))
 
     #North America
     bounds_na = [-13600000,-9000000,3700000,7350000]
@@ -757,7 +757,7 @@ cb.set_label(lab,labelpad=1.5)
 #
 
 # plt.savefig('/home/atom/ongoing/work_worldwide/figures/final/ED_Figure_7.jpg',dpi=400)
-plt.savefig('/data/icesat/travail_en_cours/romain/results/figures/ED_Figure_7.jpg',dpi=500)
+plt.savefig('/data/icesat/travail_en_cours/romain/results/figures/ED_Figure_7_proofupdate.jpg',dpi=500)
 
 # plt.savefig(out_png,dpi=400)
 
