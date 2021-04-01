@@ -2,7 +2,7 @@
 @author: hugonnet
 find ASTER L1A DEMs intersecting specific glaciers among the corrected archive per region
 """
-from __future__ import print_function
+
 import os
 import sys
 from pybob.bob_tools import mkdir_p

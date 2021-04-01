@@ -2,7 +2,7 @@
 @author: hugonnet
 find ArcticDEM or REMA DEMs intersecting specific glaciers among the PGC archive
 """
-from __future__ import print_function
+
 import os
 import sys
 from pybob.bob_tools import mkdir_p
@@ -75,26 +75,26 @@ def extract_file_from_tar_gz(tar_in,filename_in,file_out):
                 tar.members = []  # free ram... yes we have to do this manually
 
 
-# tiles = os.listdir(setsm_dir)
-#
-# for tile in tiles:
-#     print('Searching for tile ' + tile + ' in folder ' + setsm_dir + '...')
-#     subtile_dir = os.path.join(setsm_dir, tile)
-#     seg_tar_gz_list = [os.path.join(subtile_dir, tar_file) for tar_file in os.listdir(subtile_dir) if
-#                        tar_file.endswith('.tar.gz')]
-#     print('Found ' + str(len(seg_tar_gz_list)) + ' segments in tile folder.')
-#
-#     # 2/ EXTRACT ALL STRIPS
-#
-#     tmp_dir = os.path.join(setsm_dir,tile, 'all_strips')
-#
-#     mkdir_p(tmp_dir)
-#
-#     list_tmp_dem = [os.path.join(tmp_dir, os.path.splitext(os.path.splitext(os.path.basename(seg_tar_gz))[0])[0] + '_dem.tif') for seg_tar_gz in seg_tar_gz_list]
-#     for seg_tar_gz in seg_tar_gz_list:
-#         print('Extracting dem file of segment ' + str(seg_tar_gz_list.index(seg_tar_gz) + 1) + ' out of ' + str(len(seg_tar_gz_list)))
-#         extract_file_from_tar_gz(seg_tar_gz, os.path.splitext(os.path.splitext(os.path.basename(seg_tar_gz))[0])[0] + '_dem.tif',
-#                                  list_tmp_dem[seg_tar_gz_list.index(seg_tar_gz)])
+tiles = os.listdir(setsm_dir)
+
+for tile in tiles:
+    print('Searching for tile ' + tile + ' in folder ' + setsm_dir + '...')
+    subtile_dir = os.path.join(setsm_dir, tile)
+    seg_tar_gz_list = [os.path.join(subtile_dir, tar_file) for tar_file in os.listdir(subtile_dir) if
+                       tar_file.endswith('.tar.gz')]
+    print('Found ' + str(len(seg_tar_gz_list)) + ' segments in tile folder.')
+
+    # 2/ EXTRACT ALL STRIPS
+
+    tmp_dir = os.path.join(setsm_dir,tile, 'all_strips')
+
+    mkdir_p(tmp_dir)
+
+    list_tmp_dem = [os.path.join(tmp_dir, os.path.splitext(os.path.splitext(os.path.basename(seg_tar_gz))[0])[0] + '_dem.tif') for seg_tar_gz in seg_tar_gz_list]
+    for seg_tar_gz in seg_tar_gz_list:
+        print('Extracting dem file of segment ' + str(seg_tar_gz_list.index(seg_tar_gz) + 1) + ' out of ' + str(len(seg_tar_gz_list)))
+        extract_file_from_tar_gz(seg_tar_gz, os.path.splitext(os.path.splitext(os.path.basename(seg_tar_gz))[0])[0] + '_dem.tif',
+                                 list_tmp_dem[seg_tar_gz_list.index(seg_tar_gz)])
 
 
 list_files = glob(os.path.join(setsm_dir,'**/*_dem.tif'),recursive=True)
