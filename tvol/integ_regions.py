@@ -23,7 +23,9 @@ dir_shp = '/data/icesat/travail_en_cours/romain/data/outlines/rgi60/00_rgi60_nei
 fn_base = '/data/icesat/travail_en_cours/romain/data/outlines/rgi60/base_rgi.csv'
 fn_tarea='/data/icesat/travail_en_cours/romain/data/outlines/rgi60/tarea_zemp.csv'
 
-list_regions = ['01_02_rgi60','03_rgi60','04_rgi60','05_rgi60','06_rgi60','07_rgi60','08_rgi60','09_rgi60','10_rgi60','11_rgi60','12_rgi60','13_14_15_rgi60','16_rgi60','17_rgi60','18_rgi60','19_rgi60']
+#to derive contiguous region results with HMA and Alaska/WNA merged
+list_regions = ['01_02_rgi60','03_rgi60','04_rgi60','05_rgi60','06_rgi60','07_rgi60','08_rgi60','09_rgi60','10_rgi60',
+                '11_rgi60','12_rgi60','13_14_15_rgi60','16_rgi60','17_rgi60','18_rgi60','19_rgi60']
 
 for region in list_regions:
 
@@ -57,5 +59,7 @@ for fn_base in list_fn_base:
 # #aggregate worldwide by tile of 1x1°
 # list_fn_base = glob(os.path.join(results_dir,'dh_*_base.csv'))
 list_fn_base_contiguous = [os.path.join(results_dir,'dh_'+region+'_int_base.csv') for region in list_regions]
-print(list_fn_base_contiguous)
+tt.df_all_base_to_tile(list_fn_base_contiguous,fn_base,tile_size=0.5,nproc=nproc)
 tt.df_all_base_to_tile(list_fn_base_contiguous,fn_base,tile_size=1,nproc=nproc)
+tt.df_all_base_to_tile(list_fn_base_contiguous,fn_base,tile_size=2,nproc=nproc)
+tt.df_all_base_to_tile(list_fn_base_contiguous,fn_base,tile_size=4,nproc=nproc)
