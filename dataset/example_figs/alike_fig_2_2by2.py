@@ -23,29 +23,13 @@ plt.rcParams.update({'font.size': 5})
 plt.rcParams.update({'lines.linewidth':0.5})
 plt.rcParams.update({'axes.linewidth':0.5})
 
-#
-# main_dir = '/home/atom/proj/ww_tvol_study/worldwide/'
-# fn_land = '/home/atom/data/inventory_products/NaturalEarth/ne_50m_land/ne_50m_land.shp'
-# fn_hs = '/home/atom/documents/paper/Hugonnet_2020/figures/world_robin_rs.tif'
-# shp_buff = '/home/atom/data/inventory_products/RGI/00_rgi60/rgi60_buff_diss.shp'
-# in_csv = '/home/atom/ongoing/work_worldwide/vol/final/dh_world_tiles_1deg.csv'
-# out_png = '/home/atom/ongoing/work_worldwide/figures/final/Figure_2_newdata.pdf'
-
-
 period = '2000-01-01_2020-01-01'
 
-
 fn_land = '/data/icesat/travail_en_cours/romain/figures/ne_50m_land.shp'
-main_dir = '/data/icesat/travail_en_cours/romain/ww_tvol_study/worldwide/'
 fn_hs = '/data/icesat/travail_en_cours/romain/figures/world_robin_rs.tif'
 shp_buff = '/data/icesat/travail_en_cours/romain/figures/rgi60_buff_diss.shp'
-out_png = '/data/icesat/travail_en_cours/romain/results/figures/Figure_2_main.pdf'
-in_csv = '/data/icesat/travail_en_cours/romain/results/vol_final/dh_world_tiles_1deg.csv'
-
-
-rgi_naming_txt = '/data/icesat/travail_en_cours/romain/ww_tvol_study/worldwide/rgi_neighb_merged_naming_convention.txt'
-# rgi_naming_txt=os.path.join(main_dir,'rgi_neighb_merged_naming_convention.txt')
-nb_tasks = 8
+out_png = '/data/icesat/travail_en_cours/romain/results/figures/Figure_2_alike_2x2_main.pdf'
+in_csv = '/data/icesat/travail_en_cours/romain/results/vol_final/dh_world_tiles_2deg.csv'
 
 group_by_spec = True
 def latlon_to_2x2_tile_naming(lat, lon):
@@ -66,10 +50,10 @@ def latlon_to_2x2_tile_naming(lat, lon):
 def latlon_to_spec_tile_naming(lat,lon):
 
     if np.abs(lat)>=74:
-        lon_sw=np.floor((lon-0.5)/2)*2
-        lat_sw = np.floor((lat-0.5)/2)*2
+        lon_sw=np.floor(lon/4)*4
+        lat_sw = np.floor(lat/4)*4
     elif np.abs(lat) >=60:
-        lon_sw = np.floor((lon-0.5)/ 2) * 2
+        lon_sw = np.floor(lon/ 4) * 4
         lat_sw = lat
     else:
         lon_sw = lon
@@ -90,22 +74,19 @@ def latlon_to_spec_tile_naming(lat,lon):
 def latlon_to_spec_center(lat,lon):
 
     if np.abs(lat) >= 74:
-        center_lon = lon + 1.5
-        center_lat = lat + 1.5
+        center_lon = lon + 2
+        center_lat = lat + 2
 
     elif np.abs(lat) >= 60:
-        center_lon = lon + 1.5
-        center_lat = lat + 0.5
+        center_lon = lon + 2
+        center_lat = lat + 1
 
     else:
-        center_lon = lon + 0.5
-        center_lat = lat + 0.5
+        center_lon = lon + 1
+        center_lat = lat + 1
 
 
     return center_lat, center_lon
-
-# df_2 = pd.read_csv(in_csv_2)
-# df_2 = df_2[np.logical_and.reduce((df_2.category=='all',df_2.period==period))]
 
 df_all = pd.read_csv(in_csv)
 ind = np.logical_and.reduce((df_all.category=='all',df_all.period==period))
@@ -115,23 +96,11 @@ filt = np.logical_or.reduce((df_all.perc_area_meas<0.5,df_all.valid_obs<4))
 
 df_all.loc[filt,'dhdt']=np.nan
 
-# tiles = df_all.tile.tolist()
 tiles = [latlon_to_SRTMGL1_naming(df_all.tile_latmin.values[i],df_all.tile_lonmin.values[i]) for i in range(len(df_all))]
 
-#to display grey on nominal glaciers, which are thrown out by the latest tiling script... (old one didn't... why?)
-
-# tiles2 = [latlon_to_SRTMGL1_naming(df_2.tile_latmin.values[i],df_2.tile_lonmin.values[i]) for i in range(len(df_2))]
-# areas2 = df_2.area.tolist()
 areas = df_all.area.tolist()
 dhs = df_all.dhdt.tolist()
 errs = df_all.err_dhdt.tolist()
-
-# for tile2 in tiles2:
-#     if tile2 not in tiles:
-#         tiles.append(tile2)
-#         areas.append(areas2[tiles2.index(tile2)])
-#         dhs.append(np.nan)
-#         errs.append(np.nan)
 
 if group_by_spec:
     list_tile_grouped = []
@@ -333,8 +302,8 @@ def add_inset(fig,extent,position,bounds=None,label=None,polygon=None,shades=Tru
             if group_by_spec:
                 lat, lon = latlon_to_spec_center(lat,lon)
             else:
-                lat = lat+0.5
-                lon = lon+0.5
+                lat = lat
+                lon = lon
 
             if label=='Arctic West' and ((lat < 71 and lon > 60) or (lat <76 and lon>100)):
                 continue
@@ -343,7 +312,7 @@ def add_inset(fig,extent,position,bounds=None,label=None,polygon=None,shades=Tru
                 continue
 
             # fac = 0.02
-            fac = 1000
+            fac = 1500
 
             if areas[i] > 10:
                 rad = 15000 + np.sqrt(areas[i]) * fac
@@ -608,168 +577,168 @@ add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.58,-0.982,2,2],bounds=[-4.9,19,3
 add_inset(fig,[-179.99,179.99,-89.99,89.99],[-0.66,-0.89,2,2],bounds=[38,54,29,44.75],label='Middle East',markup='Caucasus (12)',markadj=0)
 
 plt.savefig(out_png,dpi=400,transparent=True)
-# plt.show()
+plt.show()
 
 
 
 # LEGEND
+
+fig_width_inch=7.2
+fig = plt.figure(figsize=(fig_width_inch,fig_width_inch/1.9716))
+
+
+axleg = fig.add_axes([-0.248,-0.86,2,2],projection=ccrs.Robinson(),label='legend')
+axleg.set_extent([-179.99,179.99,-89.99,89.99], ccrs.Geodetic())
+axleg.outline_patch.set_linewidth(0)
+
+u=0
+rad_tot = 0
+for a in [100, 1000, 10000]:
+    rad = (15000+np.sqrt(a)*1500)
+    axleg.add_patch(mpatches.Circle(xy=(-700000+rad_tot+u*600000,0),radius=rad,edgecolor='black',label=str(a)+' km$^2$', transform = ccrs.Robinson(),fill=False, zorder=30,linewidth=0.35))
+    axleg.text(-700000+rad_tot+u*600000,-350000,str(a),transform=ccrs.Robinson(),ha='center',va='center')
+    u=u+1
+    rad_tot += rad
+# axleg.text(0, -2.5, '100    1000    10000', transform=ccrs.Geodetic(),horizontalalignment='center',verticalalignment='center')
+axleg.text(0, -5.5, 'Glacierized area (km$^2$)', transform=ccrs.Geodetic(),horizontalalignment='center',verticalalignment='center')
+
+verts = mpath.Path(rect_units_to_verts([-10000000,-10000000,20000000,20000000]))
+axleg.set_boundary(verts, transform=axleg.transAxes)
+
+axleg4 = fig.add_axes([-0.005,-0.36,1,1],projection=ccrs.Robinson(),label='legend4')
+axleg4.set_extent([-179.99,179.99,-89.99,89.99], ccrs.Geodetic())
+axleg4.outline_patch.set_linewidth(0)
+bounds = [-10,10,-10,10]
+polygon = poly_from_extent(bounds)
+verts = mpath.Path(latlon_extent_to_robinson_axes_verts(polygon))
+axleg4.set_boundary(verts, transform=axleg4.transAxes)
+
+axleg4.text(13500000, 200000, 'North\nAsia (10)', fontweight='bold',ha='center')
+axleg4.text(11000000,0,'a.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(11400000,0,'Altay and\nSayan',horizontalalignment='left',verticalalignment='top')
+axleg4.text(11000000,-800000,'b.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(11400000,-800000,'Ural',horizontalalignment='left',verticalalignment='top')
+axleg4.text(11000000,-1200000,'c.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(11400000,-1200000,'North Siberia',horizontalalignment='left',verticalalignment='top')
+axleg4.text(14000000,0,'d.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(14400000,0,'Bulunsky',horizontalalignment='left',verticalalignment='top')
+axleg4.text(14000000,-400000,'e.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(14400000,-400000,'Cherskiy and\nSuntar Khayata',horizontalalignment='left',verticalalignment='top')
+axleg4.text(14000000,-1200000,'f.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(14400000,-1200000,'Kamchatka Krai',horizontalalignment='left',verticalalignment='top')
+
+axleg4.text(-15000000, 200000, 'Low\nLatitudes (16)', fontweight='bold',ha='center')
+axleg4.text(-16500000,0,'a.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(-16100000,0,'Tropical Andes',horizontalalignment='left',verticalalignment='top')
+axleg4.text(-16500000,-400000,'b.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(-16100000,-400000,'Mexico',horizontalalignment='left',verticalalignment='top')
+axleg4.text(-16500000,-800000,'c.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(-16100000,-800000,'East Africa',horizontalalignment='left',verticalalignment='top')
+axleg4.text(-16500000,-1200000,'d.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(-16100000,-1200000,'New Guinea',horizontalalignment='left',verticalalignment='top')
+
+axleg4.text(-11200000, 200000, 'Antarctic and\nSubantarctic (19)', fontweight='bold',ha='center')
+axleg4.text(-13000000,0,'a.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(-12600000,0,'West and Peninsula',horizontalalignment='left',verticalalignment='top')
+axleg4.text(-13000000,-400000,'b.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(-12600000,-400000,'South Georgia\nand Central Islands',horizontalalignment='left',verticalalignment='top')
+axleg4.text(-13000000,-1200000,'c,e.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(-12300000,-1200000,'East',horizontalalignment='left',verticalalignment='top')
+axleg4.text(-13000000,-1600000,'d.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
+axleg4.text(-12600000,-1600000,'Kerguelen and\nHeard Islands',horizontalalignment='left',verticalalignment='top')
+
+
+axleg2 = fig.add_axes([0,0,1,1],projection=ccrs.Robinson(),label='legend2')
+axleg2.outline_patch.set_linewidth(0)
+
+col_bounds = np.array([-1.5,-1.1,-0.8,-0.6,-0.4,-0.2,0,0.1,0.2,0.3,0.4,0.5,0.6])
+col_bounds = np.array(col_bounds)
+# cmap = plt.get_cmap('RdYlBu')
+cb = []
+cb_val = np.linspace(0, 1, len(col_bounds))
+for j in range(len(cb_val)):
+    cb.append(mpl.cm.RdYlBu(cb_val[j]))
+cmap = mpl.colors.LinearSegmentedColormap.from_list('my_cb', list(zip((col_bounds-min(col_bounds))/(max(col_bounds-min(col_bounds))),cb)), N=1000, gamma=1.0)
+# norm = mpl.colors.BoundaryNorm(boundaries=col_bounds, ncolors=256)
+norm = mpl.colors.Normalize(vmin=-1.5,vmax=0.6)
+sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+sm.set_array([])
+cb = plt.colorbar(sm ,ax=axleg2, ticks=[-1.5,-1.2,-0.9,-0.6,-0.3,0,0.3,0.6], orientation='horizontal',extend='both',shrink=0.35)
+# cb.ax.tick_params(labelsize=12)
+cb.ax.tick_params(width=0.5,length=2)
+cb.set_label('Mean elevation change rate\nfor 2000-2019 (m yr$^{-1}$)')
+
 #
-# fig_width_inch=7.2
-# fig = plt.figure(figsize=(fig_width_inch,fig_width_inch/1.9716))
+# axleg3 = fig.add_axes([0.30,-0.37,1,1],projection=ccrs.Robinson(),label='legend3')
+# axleg3.set_extent([-179.99,179.99,-89.99,89.99], ccrs.Geodetic())
+# axleg3.outline_patch.set_linewidth(0)
+#
+# def add_latlon_grid(ax,center_x,center_y,spacing=100000,edge=100000,size='11'):
 #
 #
-# axleg = fig.add_axes([-0.248,-0.86,2,2],projection=ccrs.Robinson(),label='legend')
-# axleg.set_extent([-179.99,179.99,-89.99,89.99], ccrs.Geodetic())
-# axleg.outline_patch.set_linewidth(0)
+#     ax.add_patch(mpatches.Arrow(center_x-spacing-edge, center_y, 2*spacing+2*edge, 0, edgecolor='black',linewidth=0.5,
+#                        transform=ccrs.Robinson(),zorder=30))
+#     ax.add_patch(mpatches.Arrow(center_x-spacing-edge, center_y+spacing, 2*spacing+2*edge, 0, edgecolor='black',linewidth=0.5,
+#                        transform=ccrs.Robinson(),zorder=30))
+#     ax.add_patch(mpatches.Arrow(center_x-spacing-edge, center_y-spacing, 2*spacing+2*edge, 0, edgecolor='black',linewidth=0.5,
+#                        transform=ccrs.Robinson(),zorder=30))
+#     ax.add_patch(mpatches.Arrow(center_x, center_y-spacing-edge, 0, 2*spacing+2*edge, edgecolor='black',linewidth=0.5,
+#                        transform=ccrs.Robinson(),zorder=30))
+#     ax.add_patch(mpatches.Arrow(center_x-spacing, center_y-spacing-edge, 0, 2*spacing+2*edge, edgecolor='black',linewidth=0.5,
+#                        transform=ccrs.Robinson(),zorder=30))
+#     ax.add_patch(mpatches.Arrow(center_x+spacing, center_y-spacing-edge, 0, 2*spacing+2*edge, edgecolor='black',linewidth=0.5,
+#                        transform=ccrs.Robinson(),zorder=30))
 #
-# u=0
-# rad_tot = 0
-# for a in [100, 1000, 10000]:
-#     rad = (15000+np.sqrt(a)*1000)
-#     axleg.add_patch(mpatches.Circle(xy=(-700000+rad_tot+u*600000,0),radius=rad,edgecolor='black',label=str(a)+' km$^2$', transform = ccrs.Robinson(),fill=False, zorder=30,linewidth=0.35))
-#     axleg.text(-700000+rad_tot+u*600000,-250000,str(a),transform=ccrs.Robinson(),ha='center',va='center')
-#     u=u+1
-#     rad_tot += rad
-# # axleg.text(0, -2.5, '100    1000    10000', transform=ccrs.Geodetic(),horizontalalignment='center',verticalalignment='center')
-# axleg.text(0, -5, 'Glacierized area (km$^2$)', transform=ccrs.Geodetic(),horizontalalignment='center',verticalalignment='center')
+#     if size=='1°x1°':
+#         ax.add_patch(mpatches.Rectangle((center_x -spacing, center_y-spacing), spacing, spacing, edgecolor='black',
+#                                     linewidth=2,
+#                                     transform=ccrs.Robinson(),facecolor='None',alpha=1))
+#     elif size=='2°x1°':
+#         ax.add_patch(mpatches.Rectangle((center_x - spacing, center_y - spacing), 2*spacing, spacing, edgecolor='black',
+#                                         linewidth=2,
+#                                         transform=ccrs.Robinson(),facecolor='None',alpha=1))
+#     elif size=='2°x2°':
+#         ax.add_patch(mpatches.Rectangle((center_x - spacing, center_y - spacing), 2*spacing, 2*spacing, edgecolor='black',
+#                                     linewidth=2,
+#                                     transform=ccrs.Robinson(), facecolor='None',alpha=1))
 #
-# verts = mpath.Path(rect_units_to_verts([-10000000,-10000000,20000000,20000000]))
-# axleg.set_boundary(verts, transform=axleg.transAxes)
+#     ax.text(center_x, center_y+500000, size, transform=ccrs.Robinson(), horizontalalignment='center',
+#                 verticalalignment='center', fontsize=10, weight='bold')
 #
-# axleg4 = fig.add_axes([-0.005,-0.36,1,1],projection=ccrs.Robinson(),label='legend4')
-# axleg4.set_extent([-179.99,179.99,-89.99,89.99], ccrs.Geodetic())
-# axleg4.outline_patch.set_linewidth(0)
+#
+# rad=200000
+# # axleg3.text(-2000000,0,'1 x',transform=ccrs.Robinson(),horizontalalignment='center',verticalalignment='center',fontsize=12)
+# axleg3.add_patch(mpatches.Circle(xy=(-1600000, 0), radius=rad, edgecolor='black',transform=ccrs.Robinson(), fill=False))
+# axleg3.text(-1000000,0,'$\in$',transform=ccrs.Robinson(),horizontalalignment='center',verticalalignment='center',fontsize=12)
+#
+# add_latlon_grid(axleg3,center_x=0,center_y=0,spacing=250000,size='1°x1°')
+#
+# add_latlon_grid(axleg3,center_x=1300000,center_y=0,spacing=250000,size='2°x1°')
+#
+# add_latlon_grid(axleg3,center_x=2600000,center_y=0,spacing=250000,size='2°x2°')
+#
+# axleg3.text(12,-6,'             0   $\\leq$   60°   $\\leq$   74°  $\\leq$   85° N-S  ',transform=ccrs.Geodetic(),horizontalalignment='center',verticalalignment='center',fontsize=12)
+# axleg3.text(12,-10,'Tile aggregation',transform=ccrs.Geodetic(),horizontalalignment='center',verticalalignment='center',fontsize=12)
+# axleg3.text(44,0,'$\\approx$ 10,000 km$^{2}$',transform=ccrs.Geodetic(),horizontalalignment='center',verticalalignment='center',fontsize=12)
+#
 # bounds = [-10,10,-10,10]
 # polygon = poly_from_extent(bounds)
 # verts = mpath.Path(latlon_extent_to_robinson_axes_verts(polygon))
-# axleg4.set_boundary(verts, transform=axleg4.transAxes)
-#
-# axleg4.text(13500000, 200000, 'North\nAsia (10)', fontweight='bold',ha='center')
-# axleg4.text(11000000,0,'a.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(11400000,0,'Altay and\nSayan',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(11000000,-800000,'b.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(11400000,-800000,'Ural',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(11000000,-1200000,'c.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(11400000,-1200000,'North Siberia',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(14000000,0,'d.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(14400000,0,'Bulunsky',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(14000000,-400000,'e.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(14400000,-400000,'Cherskiy and\nSuntar Khayata',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(14000000,-1200000,'f.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(14400000,-1200000,'Kamchatka Krai',horizontalalignment='left',verticalalignment='top')
-#
-# axleg4.text(-15000000, 200000, 'Low\nLatitudes (16)', fontweight='bold',ha='center')
-# axleg4.text(-16500000,0,'a.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(-16100000,0,'Tropical Andes',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(-16500000,-400000,'b.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(-16100000,-400000,'Mexico',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(-16500000,-800000,'c.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(-16100000,-800000,'East Africa',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(-16500000,-1200000,'d.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(-16100000,-1200000,'New Guinea',horizontalalignment='left',verticalalignment='top')
-#
-# axleg4.text(-11200000, 200000, 'Antarctic and\nSubantarctic (19)', fontweight='bold',ha='center')
-# axleg4.text(-13000000,0,'a.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(-12600000,0,'West and Peninsula',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(-13000000,-400000,'b.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(-12600000,-400000,'South Georgia\nand Central Islands',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(-13000000,-1200000,'c,e.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(-12300000,-1200000,'East',horizontalalignment='left',verticalalignment='top')
-# axleg4.text(-13000000,-1600000,'d.',horizontalalignment='left',verticalalignment='top',fontweight='bold')
-# axleg4.text(-12600000,-1600000,'Kerguelen and\nHeard Islands',horizontalalignment='left',verticalalignment='top')
-#
-#
-# axleg2 = fig.add_axes([0,0,1,1],projection=ccrs.Robinson(),label='legend2')
-# axleg2.outline_patch.set_linewidth(0)
-#
-# col_bounds = np.array([-1.5,-1.1,-0.8,-0.6,-0.4,-0.2,0,0.1,0.2,0.3,0.4,0.5,0.6])
-# col_bounds = np.array(col_bounds)
-# # cmap = plt.get_cmap('RdYlBu')
-# cb = []
-# cb_val = np.linspace(0, 1, len(col_bounds))
-# for j in range(len(cb_val)):
-#     cb.append(mpl.cm.RdYlBu(cb_val[j]))
-# cmap = mpl.colors.LinearSegmentedColormap.from_list('my_cb', list(zip((col_bounds-min(col_bounds))/(max(col_bounds-min(col_bounds))),cb)), N=1000, gamma=1.0)
-# # norm = mpl.colors.BoundaryNorm(boundaries=col_bounds, ncolors=256)
-# norm = mpl.colors.Normalize(vmin=-1.5,vmax=0.6)
-# sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
-# sm.set_array([])
-# cb = plt.colorbar(sm ,ax=axleg2, ticks=[-1.5,-1.2,-0.9,-0.6,-0.3,0,0.3,0.6], orientation='horizontal',extend='both',shrink=0.35)
-# # cb.ax.tick_params(labelsize=12)
-# cb.ax.tick_params(width=0.5,length=2)
-# cb.set_label('Mean elevation change rate\nfor 2000-2019 (m yr$^{-1}$)')
-#
-# #
-# # axleg3 = fig.add_axes([0.30,-0.37,1,1],projection=ccrs.Robinson(),label='legend3')
-# # axleg3.set_extent([-179.99,179.99,-89.99,89.99], ccrs.Geodetic())
-# # axleg3.outline_patch.set_linewidth(0)
-# #
-# # def add_latlon_grid(ax,center_x,center_y,spacing=100000,edge=100000,size='11'):
-# #
-# #
-# #     ax.add_patch(mpatches.Arrow(center_x-spacing-edge, center_y, 2*spacing+2*edge, 0, edgecolor='black',linewidth=0.5,
-# #                        transform=ccrs.Robinson(),zorder=30))
-# #     ax.add_patch(mpatches.Arrow(center_x-spacing-edge, center_y+spacing, 2*spacing+2*edge, 0, edgecolor='black',linewidth=0.5,
-# #                        transform=ccrs.Robinson(),zorder=30))
-# #     ax.add_patch(mpatches.Arrow(center_x-spacing-edge, center_y-spacing, 2*spacing+2*edge, 0, edgecolor='black',linewidth=0.5,
-# #                        transform=ccrs.Robinson(),zorder=30))
-# #     ax.add_patch(mpatches.Arrow(center_x, center_y-spacing-edge, 0, 2*spacing+2*edge, edgecolor='black',linewidth=0.5,
-# #                        transform=ccrs.Robinson(),zorder=30))
-# #     ax.add_patch(mpatches.Arrow(center_x-spacing, center_y-spacing-edge, 0, 2*spacing+2*edge, edgecolor='black',linewidth=0.5,
-# #                        transform=ccrs.Robinson(),zorder=30))
-# #     ax.add_patch(mpatches.Arrow(center_x+spacing, center_y-spacing-edge, 0, 2*spacing+2*edge, edgecolor='black',linewidth=0.5,
-# #                        transform=ccrs.Robinson(),zorder=30))
-# #
-# #     if size=='1°x1°':
-# #         ax.add_patch(mpatches.Rectangle((center_x -spacing, center_y-spacing), spacing, spacing, edgecolor='black',
-# #                                     linewidth=2,
-# #                                     transform=ccrs.Robinson(),facecolor='None',alpha=1))
-# #     elif size=='2°x1°':
-# #         ax.add_patch(mpatches.Rectangle((center_x - spacing, center_y - spacing), 2*spacing, spacing, edgecolor='black',
-# #                                         linewidth=2,
-# #                                         transform=ccrs.Robinson(),facecolor='None',alpha=1))
-# #     elif size=='2°x2°':
-# #         ax.add_patch(mpatches.Rectangle((center_x - spacing, center_y - spacing), 2*spacing, 2*spacing, edgecolor='black',
-# #                                     linewidth=2,
-# #                                     transform=ccrs.Robinson(), facecolor='None',alpha=1))
-# #
-# #     ax.text(center_x, center_y+500000, size, transform=ccrs.Robinson(), horizontalalignment='center',
-# #                 verticalalignment='center', fontsize=10, weight='bold')
-# #
-# #
-# # rad=200000
-# # # axleg3.text(-2000000,0,'1 x',transform=ccrs.Robinson(),horizontalalignment='center',verticalalignment='center',fontsize=12)
-# # axleg3.add_patch(mpatches.Circle(xy=(-1600000, 0), radius=rad, edgecolor='black',transform=ccrs.Robinson(), fill=False))
-# # axleg3.text(-1000000,0,'$\in$',transform=ccrs.Robinson(),horizontalalignment='center',verticalalignment='center',fontsize=12)
-# #
-# # add_latlon_grid(axleg3,center_x=0,center_y=0,spacing=250000,size='1°x1°')
-# #
-# # add_latlon_grid(axleg3,center_x=1300000,center_y=0,spacing=250000,size='2°x1°')
-# #
-# # add_latlon_grid(axleg3,center_x=2600000,center_y=0,spacing=250000,size='2°x2°')
-# #
-# # axleg3.text(12,-6,'             0   $\\leq$   60°   $\\leq$   74°  $\\leq$   85° N-S  ',transform=ccrs.Geodetic(),horizontalalignment='center',verticalalignment='center',fontsize=12)
-# # axleg3.text(12,-10,'Tile aggregation',transform=ccrs.Geodetic(),horizontalalignment='center',verticalalignment='center',fontsize=12)
-# # axleg3.text(44,0,'$\\approx$ 10,000 km$^{2}$',transform=ccrs.Geodetic(),horizontalalignment='center',verticalalignment='center',fontsize=12)
-# #
-# # bounds = [-10,10,-10,10]
-# # polygon = poly_from_extent(bounds)
-# # verts = mpath.Path(latlon_extent_to_robinson_axes_verts(polygon))
-# # axleg3.set_boundary(verts, transform=axleg3.transAxes)
-#
-#
-# axleg5 = fig.add_axes([-0.23,-0.365,1,1],projection=ccrs.Robinson(),label='legend5')
-# axleg5.set_extent([-179.99,179.99,-89.99,89.99], ccrs.Geodetic())
-# axleg5.outline_patch.set_linewidth(0)
-# bounds = [-10,10,-10,10]
-# polygon = poly_from_extent(bounds)
-# verts = mpath.Path(latlon_extent_to_robinson_axes_verts(polygon))
-# axleg5.set_boundary(verts, transform=axleg5.transAxes)
-#
-# axleg5.add_patch(mpatches.Rectangle((-250000,-250000), 500000, 500000, edgecolor='black',
-#                                 linewidth=0.35,
-#                                 transform=ccrs.Robinson(), facecolor='indigo', alpha=1))
-#
-# axleg5.text(0,-1000000,'Glacier\ncontours\n(minimap)',horizontalalignment='center',verticalalignment='center')
-#
-# plt.savefig('/home/atom/ongoing/work_worldwide/figures/final/Figure_2_legend.pdf',dpi=400)
+# axleg3.set_boundary(verts, transform=axleg3.transAxes)
+
+
+axleg5 = fig.add_axes([-0.23,-0.365,1,1],projection=ccrs.Robinson(),label='legend5')
+axleg5.set_extent([-179.99,179.99,-89.99,89.99], ccrs.Geodetic())
+axleg5.outline_patch.set_linewidth(0)
+bounds = [-10,10,-10,10]
+polygon = poly_from_extent(bounds)
+verts = mpath.Path(latlon_extent_to_robinson_axes_verts(polygon))
+axleg5.set_boundary(verts, transform=axleg5.transAxes)
+
+axleg5.add_patch(mpatches.Rectangle((-250000,-250000), 500000, 500000, edgecolor='black',
+                                linewidth=0.35,
+                                transform=ccrs.Robinson(), facecolor='indigo', alpha=1))
+
+axleg5.text(0,-1000000,'Glacier\ncontours\n(minimap)',horizontalalignment='center',verticalalignment='center')
+
+plt.savefig('/home/atom/ongoing/work_worldwide/figures/github_examples/Figure_2_legend.png',dpi=400)
