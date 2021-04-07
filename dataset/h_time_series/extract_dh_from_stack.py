@@ -7,11 +7,12 @@ import numpy as np
 from pybob.bob_tools import mkdir_p
 from glob import glob
 
-# example to elevation change maps (.tif) from the elevation time series (.nc)
+# example to extract elevation change maps (.tif) from the elevation time series (.nc)
 
 # all files worldwide
 world_dir = '/calcul/santo/hugonnet/worldwide'
-out_pdir = '/data/icesat/travail_en_cours/romain/all_dhs'
+out_pdir = '/data/icesat/travail_en_cours/romain/all_dhdts'
+mkdir_p(out_pdir)
 # number of cores for processing
 nproc = 32
 
@@ -49,14 +50,14 @@ for region in list_regions:
 
     out_dir = os.path.join(out_pdir,region)
     # finding all stacks in the region
-    list_fn_stacks = glob(os.path.join(world_dir,region, '**/*final.nc'), recursive=True)
+    list_fn_stacks = glob(os.path.join(world_dir,region,'stacks','**/*final.nc'), recursive=True)
     # all possibilities of stack and time period in the region
     list_tuples_region_tlims = [(list_tlims[i],list_fn_stacks[j]) for i in range(len(list_tlims)) for j in range(len(list_fn_stacks))]
 
     # run
     if nproc == 1:
         for tup in list_tuples_region_tlims:
-            wrapper_get_dh_stack((tup[0], tup[1], out_dir))
+            wrapper_get_dh_stack((tup[0], tup[1], out_dir,list_tuples_region_tlims.index(tup),len(list_tuples_region_tlims)))
     else:
         pool = mp.Pool(nproc)
         arg_dict = [(list_tuples_region_tlims[i][0],list_tuples_region_tlims[i][1],out_dir,i,len(list_tuples_region_tlims)) for i in range(len(list_tuples_region_tlims))]

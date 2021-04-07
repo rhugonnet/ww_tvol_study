@@ -34,7 +34,7 @@ field_name = 'RGI_CODE'
 # file containing RGI 6.0 (updated for this study) metadata; only necessary for sort_tw (sort tidewater/non-tidewater) = True
 fn_base = '/data/icesat/travail_en_cours/romain/data/outlines/rgi60/base_rgi.csv'
 
-df_rates, df_cumul = aggregate_int_to_shp(df_gla,fn_shp,field_name=field_name,nproc=nproc,sort_tw=True,fn_base=fn_base)
+df_cumul, df_rates, _, _ = aggregate_int_to_shp(df_gla,fn_shp,field_name=field_name,nproc=nproc,sort_tw=True,fn_base=fn_base)
 
 df_cumul.to_csv('/data/icesat/travail_en_cours/romain/results/vol_final/subreg_O2_cumul.csv')
 df_rates.to_csv('/data/icesat/travail_en_cours/romain/results/vol_final/subreg_O2_rates.csv')
