@@ -11,9 +11,9 @@ Below a short guide to: manipulate the dataset, reproduce the processing steps, 
 The dataset consists of:
 1. **Cumulative time series of volume and mass change** (.csv, *~500MB*) at an annual time step and **rates of volume 
 and mass changes** (.csv, *~3GB*) for successive 1-, 2-, 4-, 5-, 10- and 20-year periods of 2000-2019, both 
-for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and per-glacier, available at [https://doi.org/10.5281/zenodo.4530314]().
+for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and per-glacier, available at [https://doi.org/10.6096/13]().
 2. **Elevation change rasters** (.tif, *~15GB*) at 100 m posting for successive 5-, 10- and 20-year periods of 2000-2019,
- available at [https://doi.org/10.5281/zenodo.4530314]().
+ available at [https://doi.org/10.6096/13]().
 3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step (in time, might be available through NSIDC): [TBC]().
 4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting, available at [TBC]().
 
