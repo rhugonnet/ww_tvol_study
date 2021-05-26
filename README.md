@@ -1,6 +1,6 @@
 # ww_tvol_study
 
-Code and results of **Hugonnet et al. (2021), *Accelerated global glacier mass loss in the early twenty-first century***. :earth_americas: :snowflake:
+Code and results of [**Hugonnet et al. (2021), *Accelerated global glacier mass loss in the early twenty-first century***](https://doi.org/10.1038/s41586-021-03436-z). :earth_americas: :snowflake:
 
 Below a short guide to: manipulate the dataset, reproduce the processing steps, and reproduce the figures and tables.
 
