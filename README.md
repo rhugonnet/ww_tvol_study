@@ -18,7 +18,8 @@ for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and 
 4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting, only available on-demand (see note below).
 
 **Important note for data only available on-demand (3. and 4.):** *This data is very large (several TBs) and, in the case of ASTER DEMs, unfiltered (for 
-artefacts, clouds, etc). It is very difficult to use. If that is nonetheless needed, contact me with latitude-longitude coordinates of your area of interest.*
+artefacts, clouds, etc). It is very difficult to use. If that is nonetheless needed, contact me with latitude-longitude coordinates of your area of interest,
+and a description of your intended use.*
 
 **Other notes:**
 * *Global and regional series of **specific** (area-scaled) change presented throughout the article (e.g., mean elevation change) use estimates of
