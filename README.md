@@ -17,8 +17,8 @@ for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and 
 3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step, only available on-demand (see note below).
 4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting, only available on-demand (see note below).
 
-**Important note for data only available on-demand in 3. and 4.:** *This data is very large (several TBs) and, in the case of ASTER DEMs, unfiltered (for 
-artefacts, clouds, etc). It is very difficult to use. If that is still of interest, contact me with latitude-longitude coordinates of your area of interest.*
+**Important note for data only available on-demand (3. and 4.):** *This data is very large (several TBs) and, in the case of ASTER DEMs, unfiltered (for 
+artefacts, clouds, etc). It is very difficult to use. If that is nonetheless needed, contact me with latitude-longitude coordinates of your area of interest.*
 
 **Other notes:**
 * *Global and regional series of **specific** (area-scaled) change presented throughout the article (e.g., mean elevation change) use estimates of
@@ -56,11 +56,11 @@ Further details on setup and functions present in these packages are available t
 ### How to use
 
 Scripts for selecting or manipulating the dataset at various scales are located in *dataset/* and divide in three sections:
-* *gla_vol_time_series/* for the **volume and mass change time series integrated over glaciers** (.csv)
+* *gla_vol_time_series/* for the **volume and mass change time series integrated over glaciers** (.csv),
 
-* *h_time_series/* for the **elevation time series and elevation change rasters** (.nc and .tif)
+* *h_time_series/* for the **elevation time series and elevation change rasters** (.nc and .tif),
 
-* *raw_dems/* for the **bias-corrected ASTER DEMs**
+* *raw_dems/* for the **bias-corrected ASTER DEMs**.
 
 Below a few examples:
 
