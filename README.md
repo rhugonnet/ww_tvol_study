@@ -44,6 +44,8 @@ You can rapidly install a working environment containing all those packages and 
 conda env create -f ww_tvol_env.yml
 ```
 
+*Important note: for [pybob](https://github.com/iamdonovan/pybob), the development branch that needs to be installed to work with this repository is **iamdonovan/test_dev**.*
+
 Further details on setup and functions present in these packages are available through **[pyddem documentation](https://pyddem.readthedocs.io/en/latest/)** and
  **[pymmaster documentation](https://mmaster-workflows.readthedocs.io/en/latest/index.html)**.
 
