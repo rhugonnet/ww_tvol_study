@@ -14,8 +14,8 @@ and mass changes** (.csv, *~3GB*) for successive 1-, 2-, 4-, 5-, 10- and 20-year
 for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and per-glacier, available at [https://doi.org/10.6096/13](https://doi.org/10.6096/13).
 2. **Elevation change rasters** (.tif, *~15GB*) at 100 m posting for successive 5-, 10- and 20-year periods of 2000-2019,
  available at [https://doi.org/10.6096/13](https://doi.org/10.6096/13).
-3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step (in time, might be available through NSIDC): [TBC]().
-4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting, available at [TBC]().
+3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step available only on-demand.
+4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting, available at available only on-demand.
 
 *Notes:*
 * *Global and regional series of **specific** (area-scaled) change presented throughout the article (e.g., mean elevation change) use estimates of
@@ -99,11 +99,6 @@ fig, ims = ft.make_dh_animation(ds,fn_shp=fn_shp,t0=t0,month_a_year=1,dh_max=40,
 ft.write_animation(fig, ims, outfilename=out_gif,interval=500)
 ```
 
-**4. Extracting 2-year elevation change rates**
-
-```python
-TBC
-```
 
 ## Reproduce the processing steps
 
