@@ -14,10 +14,13 @@ and mass changes** (.csv, *~3GB*) for successive 1-, 2-, 4-, 5-, 10- and 20-year
 for global, regional (RGI O1 and O2), per-tile (0.5x0.5°, 1x1° and 2x2°) and per-glacier, available at [https://doi.org/10.6096/13](https://doi.org/10.6096/13).
 2. **Elevation change rasters** (.tif, *~15GB*) at 100 m posting for successive 5-, 10- and 20-year periods of 2000-2019,
  available at [https://doi.org/10.6096/13](https://doi.org/10.6096/13).
-3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step, only available on-demand.
-4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting,only available on-demand.
+3. **Elevation time series** (.nc, *~3TB*) at 100 m posting and monthly time step, only available on-demand (see note below).
+4. **Bias-corrected ASTER DEMs** (.tif, ~*10TB*) at 30 m posting, only available on-demand (see note below).
 
-*Notes:*
+**Important note for data only available on-demand in 3. and 4.:** *This data is very large (several TBs) and, in the case of ASTER DEMs, unfiltered (for 
+artefacts, clouds, etc). It is very difficult to use. If that is still of interest, contact me with latitude-longitude coordinates of your area of interest.*
+
+**Other notes:**
 * *Global and regional series of **specific** (area-scaled) change presented throughout the article (e.g., mean elevation change) use estimates of
 **time-varying glacier areas** (see Methods). Due to the lack of such estimates per individual glaciers, **specific** change per glacier is computed with **fixed areas**. 
 This means that only **global and regional direct mass/volume change are consistent with the individual glacier contributions of a given region**.*
@@ -44,7 +47,8 @@ You can rapidly install a working environment containing all those packages and 
 conda env create -f ww_tvol_env.yml
 ```
 
-*Important note: for [pybob](https://github.com/iamdonovan/pybob), the development branch that needs to be installed to work with this repository is **iamdonovan/test_dev**.*
+**Important note:** for [pybob](https://github.com/iamdonovan/pybob), the development branch installed by the environment file to work with this repository 
+is **iamdonovan/test_dev** and not the **main** branch.
 
 Further details on setup and functions present in these packages are available through **[pyddem documentation](https://pyddem.readthedocs.io/en/latest/)** and
  **[pymmaster documentation](https://mmaster-workflows.readthedocs.io/en/latest/index.html)**.
