@@ -25,7 +25,7 @@ dependencies:
     - dask==0.19.4
     - h5py==2.8.0
     - pkgconfig==1.4.0
-    - https://github.com/iamdonovan/pybob.git@iamdonovan/test_dev
+    - git+https://github.com/iamdonovan/pybob.git@iamdonovan/test_dev
     - pyddem==0.1.1
     - pymmaster==0.1
     - pyvips==2.1.4
