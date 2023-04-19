@@ -31,7 +31,7 @@ dependencies:
     - pyvips==2.1.4
     - ruptures==1.0.1
     - scikit-gstat==0.2.5
-    - scikit-image==0.15.0
+    - scikit-image
     - xarray==0.14.0
 
 
