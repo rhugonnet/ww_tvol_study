@@ -42,14 +42,13 @@ Most scripts rely on code assembled in the packages [pyddem](https://github.com/
 
 You can rapidly install a working environment containing all those packages and their dependencies with the 
 *ww_tvol_env.yml* file, located at the root of the repository, using 
-[conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html):
+[mamba](https://mamba.readthedocs.io/en/latest/):
 
 ```sh
-conda env create -f ww_tvol_env.yml
+mamba env create -f ww_tvol_env.yml
 ```
 
-**Important note:** *for [pybob](https://github.com/iamdonovan/pybob), the development branch installed by the environment file to work with this repository 
-is **iamdonovan/test_dev** and not the **main** branch.*
+**Important note:** *for [pybob](https://github.com/iamdonovan/pybob), the development branch installed by the environment file to work with this repository is **iamdonovan/test_dev** and not the **main** branch.*
 
 Further details on setup and functions present in these packages are available through **[pyddem documentation](https://pyddem.readthedocs.io/en/latest/)** and
  **[pymmaster documentation](https://mmaster-workflows.readthedocs.io/en/latest/index.html)**.
